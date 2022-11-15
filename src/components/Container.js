@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import CurrentPlayerContext from '../contexts/CurrentPlayerContext'
+import PlayerContext from '../contexts/PlayerContext'
 import Grid from './Grid'
 import Header from './Header'
 import Instruction from './Instruction'
@@ -10,19 +11,11 @@ import WinnerBanner from './WinnerBanner'
 import WordEntry from './WordEntry'
 
 const Container = () => {
-  const players = [
-    {
-      name: "William",
-      color: "red"
-    },
-    {
-      name: "Kate",
-      color: "blue"
-    }
-  ]
+  const players = useContext(PlayerContext)
   return (
-    <CurrentPlayerContext.Provider value={players[0]}>
-      <div id="container">
+    <PlayerContext.Provider value={players}>
+      <CurrentPlayerContext.Provider value={players[0]}>
+        <div id="container">
           <TextFlash />
           <WinnerBanner />
           <Header />
@@ -31,8 +24,9 @@ const Container = () => {
           <WordEntry />
           <ScoreTable />
           <ScoreNotification />
-      </div>
-    </CurrentPlayerContext.Provider>
+        </div>
+      </CurrentPlayerContext.Provider>
+    </PlayerContext.Provider> 
   )
 }
 

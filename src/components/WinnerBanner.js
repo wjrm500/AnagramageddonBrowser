@@ -9,7 +9,7 @@ const WinnerBanner = () => {
           <span id="winningPlayer">{winningPlayer}</span> won the game!
         </div>
         <div>
-            <button id="startNewGame" onclick={onButtonClick}>
+            <button id="startNewGame" onClick={onButtonClick}>
               Start new game
             </button>
         </div>

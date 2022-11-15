@@ -2,11 +2,11 @@ import React from 'react'
 
 const WordEntry = () => {
   return (
-    <div id="wordEntryContainer" class="inactive">
-        <div class="labelContainer">
+    <div id="wordEntryContainer" className="inactive">
+        <div className="labelContainer">
             <label>Enter a word</label>
         </div>
-        <div class="inputContainer">
+        <div className="inputContainer">
             <input id="word-entry" type="text" disabled />
         </div>
     </div>
