@@ -10,7 +10,7 @@ import WordEntry from './WordEntry'
 
 const Container = () => {
   return (
-    <div>
+    <div id="container">
         <TextFlash />
         <WinnerBanner />
         <Header />

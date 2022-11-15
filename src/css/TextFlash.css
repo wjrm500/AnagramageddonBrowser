@@ -9,3 +9,16 @@
   white-space: nowrap;
   z-index: 2;
 }
+
+@keyframes fontGrow {
+  0% { font-size: 12px; opacity: 1; }
+  25% { font-size: 36px; opacity: 0.9; }
+  50% { font-size: 108px; opacity: 0.7; }
+  75% { font-size: 324px; opacity: 0.4; }
+  100% { font-size: 972px; opacity: 0; }
+}
+
+.fontGrow {
+  animation: fontGrow 0.75s linear;
+  display: block !important;
+}
