@@ -1,5 +1,5 @@
 import React from 'react'
-import { generateRandomLetter } from './utilities/randomLetter'
+import { generateRandomLetter } from '../utilities/randomLetter'
 
 const Box = () => {
   const letter = generateRandomLetter();
