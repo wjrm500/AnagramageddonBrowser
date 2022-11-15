@@ -2,7 +2,9 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <h1>Anagramageddon</h1>
+    <h1 id="headerText">
+      ANAGRAMAGEDDON
+    </h1>
   )
 }
 
