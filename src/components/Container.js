@@ -4,11 +4,15 @@ import Header from './Header'
 import Instruction from './Instruction'
 import ScoreNotification from './ScoreNotification'
 import ScoreTable from './ScoreTable'
+import TextFlash from './TextFlash'
+import WinnerBanner from './WinnerBanner'
 import WordEntry from './WordEntry'
 
 const Container = () => {
   return (
     <div>
+        <TextFlash />
+        <WinnerBanner />
         <Header />
         <Instruction />
         <Grid />
