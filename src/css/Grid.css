@@ -1,3 +1,5 @@
+@import "Box.css";
+
 #grid {
   display: grid;
   grid-auto-flow: row;
