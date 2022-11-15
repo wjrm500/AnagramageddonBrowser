@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import CurrentPlayerContext from '../contexts/CurrentPlayerContext'
+import ActivePlayerContext from '../contexts/ActivePlayerContext'
 import PlayerContext from '../contexts/PlayerContext'
 import Grid from './Grid'
 import Header from './Header'
@@ -14,7 +14,7 @@ const Container = () => {
   const players = useContext(PlayerContext)
   return (
     <PlayerContext.Provider value={players}>
-      <CurrentPlayerContext.Provider value={players[0]}>
+      <ActivePlayerContext.Provider value={players[0]}>
         <div id="container">
           <TextFlash />
           <WinnerBanner />
@@ -25,7 +25,7 @@ const Container = () => {
           <ScoreTable />
           <ScoreNotification />
         </div>
-      </CurrentPlayerContext.Provider>
+      </ActivePlayerContext.Provider>
     </PlayerContext.Provider> 
   )
 }

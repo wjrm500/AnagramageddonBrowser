@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import ActivePlayerContext from '../contexts/ActivePlayerContext'
 
 const Instruction = () => {
-  const activePlayer = "William"
+  const activePlayer = useContext(ActivePlayerContext)
   const prompt = "Click a square next to one of your squares"
   const secondsRemaining = 5
   return (
-    <div>
-      It's <span id="activePlayer">{activePlayer}</span>'s turn! {prompt}. You've got <span id="timer">{secondsRemaining}</span> seconds...
-      </div>
+    <div id="instruction">
+      It's <span id="activePlayer">{activePlayer.name}</span>'s turn! {prompt}. You've got <span id="timer">{secondsRemaining}</span> seconds...
+    </div>
   )
 }
 

@@ -1,26 +1,64 @@
-import React, { useContext, useState } from 'react'
-import CurrentPlayerContext from '../contexts/CurrentPlayerContext'
+import React from 'react'
+import ActivePlayerContext from '../contexts/ActivePlayerContext'
 import { generateRandomLetter } from '../utilities/randomLetter'
 
-const Box = ({defaultPlayer}) => {
-  const [letter, setLetter] = useState(generateRandomLetter())
-  const [player, setPlayer] = useState(defaultPlayer) // Player object
-  const currentPlayer = useContext(CurrentPlayerContext)
-  const onClick = () => setPlayer(currentPlayer)
-  return (
-    <div className="outerBox">
-      <div
-        className="innerBox"
-        style={{
-          backgroundColor: player ? player.color : "",
-          color: player ? "white" : ""
-        }}
-        onClick={onClick}
-        >
-        {letter}
+class Box extends React.Component {
+  static contextType = ActivePlayerContext
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      coords: {x: props.rowIdx, y: props.colIdx},
+      letter: generateRandomLetter(),
+      defaultPlayer: props.defaultPlayer
+    }
+  }
+
+  componentDidMount() {
+    if (this.state.defaultPlayer) {
+      this.setPlayer(this.state.defaultPlayer)
+    }
+  }
+
+  getX = () => this.state.coords.x
+
+  getY = () => this.state.coords.y
+
+  setPlayer = (player) => {
+    if (this.state.player) {
+      this.state.player.removeBox()
+    }
+    this.setState({
+      player: player
+    })
+    player.addBox(this)
+  }
+
+  onClick = () => {
+    console.log(this.state)
+    const activePlayer = this.context
+    if (activePlayer.canAddBox(this)) {
+      this.setPlayer(activePlayer)
+    }
+  }
+
+  render() {
+    return (
+      <div className="outerBox">
+        <div
+          className="innerBox"
+          style={{
+            backgroundColor: this.state.player ? this.state.player.color : "",
+            color: this.state.player ? "white" : ""
+          }}
+          onClick={this.onClick}
+          >
+          {this.state.letter}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
+    
 }
 
 export default Box

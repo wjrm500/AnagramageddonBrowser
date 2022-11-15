@@ -9,9 +9,11 @@ const Grid = () => {
   const rows = Array(dimension).fill().map((_, rowIdx) => {
     const row = Array(dimension).fill().map((_, colIdx) => {
       let player
-      if (rowIdx + colIdx == 0) { // Top left
+      const topLeft = rowIdx + colIdx == 0
+      const bottomRight = rowIdx * colIdx == Math.pow(dimension - 1, 2)
+      if (topLeft) {
         player = players[0]
-      } else if (rowIdx * colIdx == Math.pow(dimension - 1, 2)) { // Bottom right
+      } else if (bottomRight) {
         player = players[1]
       }
       const box = <Box defaultPlayer={player} rowIdx={rowIdx} colIdx={colIdx} />

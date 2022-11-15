@@ -1,14 +1,9 @@
 import { createContext } from 'react';
+import { Player } from '../non-components/Player';
 
 const players = [
-  {
-    name: "William",
-    color: "red"
-  },
-  {
-    name: "Kate",
-    color: "blue"
-  }
+  new Player("William", "red"),
+  new Player("Kate", "blue")
 ]
 
 const PlayerContext = createContext(players)
