@@ -1,0 +1,17 @@
+#scoreTable {
+  border-collapse: collapse;
+  border-radius: 5px;
+  box-shadow: 0 0 10px lightgray;
+  color: black;
+  margin-top: 20px;
+  width: 500px;
+}
+
+#scoreTable tr:first {
+  border-bottom: 1px solid lightblue;
+}
+
+#scoreTable th, #scoreTable td {
+  padding: 5px 0px;
+  text-align: center;
+}
