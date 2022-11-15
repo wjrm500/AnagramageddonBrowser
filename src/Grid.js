@@ -11,7 +11,7 @@ const Grid = () => {
   }
   ) 
   return (
-    <div>
+    <div id="grid">
       {rows}
     </div>
   )
