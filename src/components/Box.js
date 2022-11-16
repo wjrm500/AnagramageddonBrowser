@@ -14,7 +14,10 @@ class Box extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    this.setState({active: props.active})
+    this.setState({
+      activePlayer: props.activePlayer,
+      active: props.active
+    })
   }
 
   componentDidMount() {

@@ -1,8 +1,12 @@
 import React, { useContext, useState } from 'react'
-import { ACTION_CLICK_BOX, RequiredActionDispatchContext } from '../contexts/RequiredActionContext'
+import { SwitchActivePlayerContext } from '../contexts/ActivePlayerContext'
+import PlayerContext from '../contexts/PlayerContext'
+import { ACTION_CLICK_BOX, SetRequiredActionContext } from '../contexts/RequiredActionContext'
 
 const WordEntry = ({active}) => {
-  const requiredActionDispatch = useContext(RequiredActionDispatchContext)
+  const setRequiredAction = useContext(SetRequiredActionContext)
+  const switchActivePlayer = useContext(SwitchActivePlayerContext)
+  const players = useContext(PlayerContext)
   const [value, setValue] = useState("")
   const onChange = (e) => {
     setValue(e.target.value)
@@ -10,7 +14,8 @@ const WordEntry = ({active}) => {
   const onKeyDown = (e) => {
     if (e.key == "Enter") {
       setValue("")
-      requiredActionDispatch(ACTION_CLICK_BOX)
+      setRequiredAction(ACTION_CLICK_BOX)
+      switchActivePlayer()
     }
   }
   

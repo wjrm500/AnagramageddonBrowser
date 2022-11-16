@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import ActivePlayerContext from '../contexts/ActivePlayerContext'
+import { ActivePlayerContext } from '../contexts/ActivePlayerContext'
 
 const Instruction = () => {
   const activePlayer = useContext(ActivePlayerContext)
