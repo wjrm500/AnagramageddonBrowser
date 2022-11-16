@@ -36,7 +36,7 @@ const Container = () => {
                 <Instruction />
                 <Grid />
                 <WordEntry active={requiredAction == ACTION_ENTER_WORD} />
-                <ScoreTable />
+                <ScoreTable player1Score={players[0].score} player2Score={players[1].score} />
                 <ScoreNotification />
               </div>
             </RequiredActionContext.Provider>

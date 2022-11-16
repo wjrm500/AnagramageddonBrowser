@@ -42,12 +42,12 @@ class Box extends React.Component {
   }
 
   onClick = () => {
-    this.state.postBoxClickHandler()
     if (!this.state.active) {
       return false
     }
     if (this.state.activePlayer.canAddBox(this)) {
       this.setPlayer(this.state.activePlayer)
+      this.state.postBoxClickHandler()
     }
   }
 

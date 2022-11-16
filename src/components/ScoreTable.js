@@ -1,8 +1,6 @@
 import React from 'react'
 
-const ScoreTable = () => {
-  const player1Score = 0
-  const player2Score = 0
+const ScoreTable = ({player1Score, player2Score}) => {
   return (
     <table id="scoreTable">
       <thead>
