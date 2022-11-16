@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import ActivePlayerContext from '../contexts/ActivePlayerContext'
 import PlayerContext from '../contexts/PlayerContext'
-import { ACTION_ENTER_WORD, RequiredActionContext, RequiredActionDispatchContext } from '../contexts/RequiredActionContext'
+import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, RequiredActionContext, RequiredActionDispatchContext } from '../contexts/RequiredActionContext'
 import Box from './Box'
 
 const Grid = () => {
-  const dimension = 8
+  const dimension = 5
   const players = useContext(PlayerContext)
   const activePlayer = useContext(ActivePlayerContext)
   const requiredAction = useContext(RequiredActionContext)
@@ -22,13 +22,12 @@ const Grid = () => {
       } else if (bottomRight) {
         player = players[1]
       }
-      const box = <Box defaultPlayer={player} rowIdx={rowIdx} colIdx={colIdx} activePlayer={activePlayer} requiredAction={requiredAction} postBoxClickHandler={postBoxClickHandler}/>
+      const box = <Box defaultPlayer={player} rowIdx={rowIdx} colIdx={colIdx} activePlayer={activePlayer} active={requiredAction == ACTION_CLICK_BOX} postBoxClickHandler={postBoxClickHandler}/>
       boxes.push(box)
       return box
     })
     return <div className="row">{row}</div>
   })
-  // const getRandomBox = () => boxes[Math.floor(Math.random() * boxes.length)]
   return (
     <div id="grid">
       {rows}

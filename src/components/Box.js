@@ -1,5 +1,4 @@
 import React from 'react'
-import { ACTION_CLICK_BOX } from '../contexts/RequiredActionContext'
 import { generateRandomLetter } from '../utilities/randomLetter'
 
 class Box extends React.Component {
@@ -9,13 +8,13 @@ class Box extends React.Component {
       defaultPlayer: props.defaultPlayer,
       coords: {x: props.rowIdx, y: props.colIdx},
       activePlayer: props.activePlayer,
-      requiredAction: props.requiredAction,
+      active: props.active,
       postBoxClickHandler: props.postBoxClickHandler
     }
   }
 
   componentWillReceiveProps(props) {
-    this.setState({requiredAction: props.requiredAction})
+    this.setState({active: props.active})
   }
 
   componentDidMount() {
@@ -41,7 +40,7 @@ class Box extends React.Component {
 
   onClick = () => {
     this.state.postBoxClickHandler()
-    if (this.state.requiredAction != ACTION_CLICK_BOX) {
+    if (!this.state.active) {
       return false
     }
     if (this.state.activePlayer.canAddBox(this)) {
@@ -53,7 +52,7 @@ class Box extends React.Component {
     return (
       <div className="outerBox">
         <div
-          className={"innerBox " + (this.state.requiredAction != ACTION_CLICK_BOX ? "inactive" : "")}
+          className={"innerBox " + (!this.state.active ? "inactive" : "")}
           style={{
             backgroundColor: this.state.player ? this.state.player.color : "",
             color: this.state.player ? "white" : ""
