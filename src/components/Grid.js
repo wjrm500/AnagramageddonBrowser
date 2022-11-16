@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { ActivePlayerContext } from '../contexts/ActivePlayerContext'
 import PlayerContext from '../contexts/PlayerContext'
 import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, RequiredActionContext, SetRequiredActionContext } from '../contexts/RequiredActionContext'
-import SetTextFlashContext from '../contexts/TextFlashContext'
+import { SetTextFlashContext } from '../contexts/TextFlashContext'
 import Box from './Box'
 
 const Grid = () => {

@@ -18,12 +18,22 @@
   100% { font-size: 972px; opacity: 0; visibility: visible; }
 } */
 
-@keyframes fontGrow {
+@keyframes fontGrowBig {
+  0% { font-size: 36px; opacity: 1.0; visibility: visible; }
+  30% { font-size: 108px; opacity: 0.9; visibility: visible; }
+  100% { font-size: 300px; opacity: 0; visibility: visible; }
+}
+
+.fontGrow.flashScore {
+  animation: fontGrowBig 0.75s linear;
+}
+
+@keyframes fontGrowSmall {
   0% { font-size: 12px; opacity: 1.0; visibility: visible; }
   30% { font-size: 36px; opacity: 0.9; visibility: visible; }
   100% { font-size: 100px; opacity: 0; visibility: visible; }
 }
 
-.fontGrow {
-  animation: fontGrow 0.75s linear;
+.fontGrow.notFlashScore {
+  animation: fontGrowSmall 0.75s linear;
 }

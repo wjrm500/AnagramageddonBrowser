@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { ActivePlayerContext, SwitchActivePlayerContext } from '../contexts/ActivePlayerContext'
 import { ACTION_CLICK_BOX, SetRequiredActionContext } from '../contexts/RequiredActionContext'
-import SetTextFlashContext from '../contexts/TextFlashContext'
+import { FLASH_ERROR, FLASH_SCORE, SetTextFlashContext } from '../contexts/TextFlashContext'
 import { validateWord } from '../utilities/validateWord'
 
 const WordEntry = ({active}) => {
@@ -12,7 +12,7 @@ const WordEntry = ({active}) => {
   const [value, setValue] = useState("")
   const onClick = () => {
     if (!active) {
-      setTextFlash({content: "Click a box", color: "red"})
+      setTextFlash({content: "Click a box", status: FLASH_ERROR})
     }
   }
   const onChange = (e) => {
@@ -24,12 +24,12 @@ const WordEntry = ({active}) => {
       validateWord(word, activePlayer)
         .then(() => {
           activePlayer.enterWord(word)
-          setTextFlash({content: "+" + word.length, color: "limegreen"})
+          setTextFlash({content: "+" + word.length, status: FLASH_SCORE})
           setValue("")
           setRequiredAction(ACTION_CLICK_BOX)
           switchActivePlayer()
         })
-        .catch((error) => setTextFlash({content: error, color: "red"}))
+        .catch((error) => setTextFlash({content: error, status: FLASH_ERROR}))
     }
   }
   return (
@@ -38,7 +38,7 @@ const WordEntry = ({active}) => {
             <label>Enter a word</label>
         </div>
         <div className="inputContainer" onClick={onClick}>
-            <input ref={input => input && input.focus()} id="wordEntry" type="text" value={value} disabled={!active} autoComplete={false} onChange={onChange} onKeyDown={onKeyDown} />
+            <input ref={input => input && input.focus()} id="wordEntry" type="text" value={value} disabled={!active} autoComplete="off" onChange={onChange} onKeyDown={onKeyDown} />
         </div>
     </div>
   )

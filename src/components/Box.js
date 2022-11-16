@@ -1,4 +1,5 @@
 import React from 'react'
+import { FLASH_ERROR } from '../contexts/TextFlashContext'
 import { generateRandomLetter } from '../utilities/randomLetter'
 
 class Box extends React.Component {
@@ -44,14 +45,14 @@ class Box extends React.Component {
 
   onClick = () => {
     if (!this.state.active) {
-      this.state.setTextFlash({content: "Enter a word", color: "red"})
+      this.state.setTextFlash({content: "Enter a word", status: FLASH_ERROR})
       return
     }
     if (this.state.activePlayer.canAddBox(this)) {
       this.setPlayer(this.state.activePlayer)
       this.state.postBoxClickHandler()
     } else {
-      this.state.setTextFlash({content: "Can't go here", color: "red"})
+      this.state.setTextFlash({content: "Can't go here", status: FLASH_ERROR})
     }
   }
 
