@@ -9,8 +9,13 @@ class Box extends React.Component {
       defaultPlayer: props.defaultPlayer,
       coords: {x: props.rowIdx, y: props.colIdx},
       activePlayer: props.activePlayer,
-      requiredAction: props.requiredAction
+      requiredAction: props.requiredAction,
+      postBoxClickHandler: props.postBoxClickHandler
     }
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({requiredAction: props.requiredAction})
   }
 
   componentDidMount() {
@@ -35,6 +40,7 @@ class Box extends React.Component {
   }
 
   onClick = () => {
+    this.state.postBoxClickHandler()
     if (this.state.requiredAction != ACTION_CLICK_BOX) {
       return false
     }
@@ -52,7 +58,7 @@ class Box extends React.Component {
             backgroundColor: this.state.player ? this.state.player.color : "",
             color: this.state.player ? "white" : ""
           }}
-          onClick={() => this.onClick()}
+          onClick={this.onClick}
           >
           {this.state.letter}
         </div>
