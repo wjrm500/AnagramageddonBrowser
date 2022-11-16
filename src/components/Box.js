@@ -50,6 +50,8 @@ class Box extends React.Component {
     if (this.state.activePlayer.canAddBox(this)) {
       this.setPlayer(this.state.activePlayer)
       this.state.postBoxClickHandler()
+    } else {
+      this.state.setTextFlash({content: "Can't go here", color: "red"})
     }
   }
 
