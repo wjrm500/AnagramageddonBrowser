@@ -14,17 +14,16 @@ const WordEntry = ({active}) => {
   const onKeyDown = (e) => {
     if (e.key == "Enter") {
       const word = e.target.value
-      validateWord(word, activePlayer).then((wordValid) => {
-        if (wordValid.success) {
+      validateWord(word, activePlayer)
+        .then(() => {
           activePlayer.score += word.length
           setValue("")
           setRequiredAction(ACTION_CLICK_BOX)
           switchActivePlayer()
-        }
-      })
+        })
+        .catch((error) => console.log(error))
     }
   }
-  
   return (
     <div id="wordEntryContainer" className={active ? "active" : "inactive"}>
         <div className="labelContainer">

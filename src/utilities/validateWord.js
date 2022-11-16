@@ -6,7 +6,7 @@ export function validateWord(word, player) {
 
   // Check whether player has already used word
   if (player.wordsUsed.includes(word)) {
-    return Promise.resolve({success: false, error: "Already used"})
+    return Promise.reject("Already used")
   }
 
   // Check whether word can be formed from player's letters
@@ -15,7 +15,7 @@ export function validateWord(word, player) {
   for (let wordLetter of wordLetters) {
     const letterIndex = playerLetters.indexOf(wordLetter)
     if (letterIndex == -1) {
-      return Promise.resolve({success: false, error: "Incorrect letters"})
+      return Promise.reject("Incorrect letters")
     }
     playerLetters.splice(letterIndex, 1)
   }
@@ -27,9 +27,9 @@ export function validateWord(word, player) {
       response => {
         response.json().then(function() {
           if (missingWords.includes(word) || response.status == 200) {
-            resolve({success: true, error: null})
+            resolve()
           } else {
-            resolve({success: false, error: "Invalid word"})
+            reject("Invalid word")
           }
         })
       }
