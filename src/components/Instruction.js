@@ -1,9 +1,15 @@
 import React, { useContext } from 'react'
 import { ActivePlayerContext } from '../contexts/ActivePlayerContext'
+import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, RequiredActionContext } from '../contexts/RequiredActionContext'
 
 const Instruction = () => {
   const activePlayer = useContext(ActivePlayerContext)
-  const prompt = "Click a square next to one of your squares"
+  const requiredAction = useContext(RequiredActionContext)
+  const promptMap = new Map([
+    [ACTION_CLICK_BOX, "Click a square next to one of your squares"],
+    [ACTION_ENTER_WORD, "Enter a word that can be formed by your letters"]
+  ])
+  const prompt = promptMap.get(requiredAction)
   const secondsRemaining = 5
   return (
     <div id="instruction">
