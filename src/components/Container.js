@@ -27,7 +27,7 @@ const Container = () => {
               <Header />
               <Instruction />
               <Grid />
-              <WordEntry />
+              <WordEntry active={requiredActionState == ACTION_ENTER_WORD} />
               <ScoreTable />
               <ScoreNotification />
             </div>

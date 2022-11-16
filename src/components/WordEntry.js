@@ -1,8 +1,8 @@
 import React from 'react'
 
-const WordEntry = () => {
+const WordEntry = ({active}) => {
   return (
-    <div id="wordEntryContainer" className="inactive">
+    <div id="wordEntryContainer" className={active ? "active" : "inactive"}>
         <div className="labelContainer">
             <label>Enter a word</label>
         </div>
