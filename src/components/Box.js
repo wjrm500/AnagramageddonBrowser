@@ -3,8 +3,6 @@ import ActivePlayerContext from '../contexts/ActivePlayerContext'
 import { generateRandomLetter } from '../utilities/randomLetter'
 
 class Box extends React.Component {
-  static contextType = ActivePlayerContext
-
   constructor(props) {
     super(props)
     this.state = {
@@ -34,9 +32,7 @@ class Box extends React.Component {
     player.addBox(this)
   }
 
-  onClick = () => {
-    console.log(this.state)
-    const activePlayer = this.context
+  onClick = (activePlayer) => {
     if (activePlayer.canAddBox(this)) {
       this.setPlayer(activePlayer)
     }
@@ -44,18 +40,24 @@ class Box extends React.Component {
 
   render() {
     return (
-      <div className="outerBox">
-        <div
-          className="innerBox"
-          style={{
-            backgroundColor: this.state.player ? this.state.player.color : "",
-            color: this.state.player ? "white" : ""
-          }}
-          onClick={this.onClick}
-          >
-          {this.state.letter}
-        </div>
-      </div>
+      <ActivePlayerContext.Consumer>
+        {
+          (activePlayer) => (
+            <div className="outerBox">
+              <div
+                className="innerBox"
+                style={{
+                  backgroundColor: this.state.player ? this.state.player.color : "",
+                  color: this.state.player ? "white" : ""
+                }}
+                onClick={() => this.onClick(activePlayer)}
+                >
+                {this.state.letter}
+              </div>
+            </div>
+          )
+        }
+      </ActivePlayerContext.Consumer>
     )
   }
     
