@@ -2,8 +2,6 @@ const dictionaryUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/"
 const missingWords = ["BE", "FOR", "IS", "WAS"]
 
 export function validateWord(word, player) {
-  word = word.toUpperCase()
-
   // Check whether player has already used word
   if (player.wordsUsed.includes(word)) {
     return Promise.reject("Already used")

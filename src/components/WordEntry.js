@@ -15,11 +15,11 @@ const WordEntry = ({active}) => {
   }
   const onKeyDown = (e) => {
     if (e.key == "Enter") {
-      const word = e.target.value
+      const word = e.target.value.toUpperCase()
       validateWord(word, activePlayer)
         .then(() => {
+          activePlayer.enterWord(word)
           setTextFlash({content: "+" + word.length, color: "limegreen"})
-          activePlayer.score += word.length
           setValue("")
           setRequiredAction(ACTION_CLICK_BOX)
           switchActivePlayer()

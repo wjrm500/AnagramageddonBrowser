@@ -26,4 +26,9 @@ export class Player {
     }
     return false
   }
+
+  enterWord = (word) => {
+    this.wordsUsed.push(word)
+    this.score += word.length
+  }
 }
