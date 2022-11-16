@@ -24,7 +24,7 @@ const WordEntry = ({active}) => {
           setRequiredAction(ACTION_CLICK_BOX)
           switchActivePlayer()
         })
-        .catch((error) => console.log(error))
+        .catch((error) => setTextFlash({content: error, color: "red"}))
     }
   }
   return (
