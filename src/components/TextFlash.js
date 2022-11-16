@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import SetTextFlashContext from '../contexts/TextFlashContext'
 
-const TextFlash = () => {
+const TextFlash = ({visible, textFlash}) => {
+  const setTextFlash = useContext(SetTextFlashContext)
+  const onAnimationEnd = () => setTextFlash({content: "", color: "black"})
   return (
-    <div id="textFlash"></div>
+    <div id="textFlash" style={{color: textFlash.color}} className={visible ? "fontGrow" : ""} onAnimationEnd={onAnimationEnd}>
+      {textFlash.content}
+    </div>
   )
 }
 
