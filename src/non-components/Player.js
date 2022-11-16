@@ -4,6 +4,7 @@ export class Player {
     this.color = color
     this.score = 0
     this.boxes = []
+    this.wordsUsed = []
   }
 
   addBox(box) {

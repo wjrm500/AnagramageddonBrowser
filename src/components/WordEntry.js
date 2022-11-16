@@ -1,23 +1,27 @@
 import React, { useContext, useState } from 'react'
 import { ActivePlayerContext, SwitchActivePlayerContext } from '../contexts/ActivePlayerContext'
-import PlayerContext from '../contexts/PlayerContext'
 import { ACTION_CLICK_BOX, SetRequiredActionContext } from '../contexts/RequiredActionContext'
+import { validateWord } from '../utilities/validateWord'
 
 const WordEntry = ({active}) => {
   const setRequiredAction = useContext(SetRequiredActionContext)
   const activePlayer = useContext(ActivePlayerContext)
   const switchActivePlayer = useContext(SwitchActivePlayerContext)
-  // const players = useContext(PlayerContext)
   const [value, setValue] = useState("")
   const onChange = (e) => {
     setValue(e.target.value)
   }
   const onKeyDown = (e) => {
     if (e.key == "Enter") {
-      activePlayer.score += e.target.value.length
-      setValue("")
-      setRequiredAction(ACTION_CLICK_BOX)
-      switchActivePlayer()
+      const word = e.target.value
+      validateWord(word, activePlayer).then((wordValid) => {
+        if (wordValid.success) {
+          activePlayer.score += word.length
+          setValue("")
+          setRequiredAction(ACTION_CLICK_BOX)
+          switchActivePlayer()
+        }
+      })
     }
   }
   
