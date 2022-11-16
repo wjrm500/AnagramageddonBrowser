@@ -34,7 +34,7 @@ const Container = () => {
             <SetRequiredActionContext.Provider value={setRequiredAction}>
               <RequiredActionContext.Provider value={requiredAction}>
                 <div id="container">
-                  <TextFlash visible={textFlash.content.length > 0} textFlash={textFlash} />
+                  <TextFlash textFlash={textFlash} />
                   <WinnerBanner />
                   <Header />
                   <Instruction />

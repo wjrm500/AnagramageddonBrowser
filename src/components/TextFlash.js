@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import { FLASH_NEUTRAL, FLASH_SCORE, SetTextFlashContext } from '../contexts/TextFlashContext'
 
-const TextFlash = ({visible, textFlash}) => {
+const TextFlash = ({textFlash}) => {
   const setTextFlash = useContext(SetTextFlashContext)
   const onAnimationEnd = () => setTextFlash({content: "", status: FLASH_NEUTRAL})
   let classNames = []
-  if (visible) {
+  if (textFlash.content.length > 0) {
     classNames.push("fontGrow")
   }
   if (textFlash.status == FLASH_SCORE) {
