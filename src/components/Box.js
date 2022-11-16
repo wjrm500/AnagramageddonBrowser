@@ -1,14 +1,15 @@
 import React from 'react'
-import ActivePlayerContext from '../contexts/ActivePlayerContext'
+import { ACTION_CLICK_BOX } from '../contexts/RequiredActionContext'
 import { generateRandomLetter } from '../utilities/randomLetter'
 
 class Box extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      defaultPlayer: props.defaultPlayer,
       coords: {x: props.rowIdx, y: props.colIdx},
-      letter: generateRandomLetter(),
-      defaultPlayer: props.defaultPlayer
+      activePlayer: props.activePlayer,
+      requiredAction: props.requiredAction
     }
   }
 
@@ -16,6 +17,9 @@ class Box extends React.Component {
     if (this.state.defaultPlayer) {
       this.setPlayer(this.state.defaultPlayer)
     }
+    this.setState({
+      letter: generateRandomLetter()
+    })
   }
 
   getX = () => this.state.coords.x
@@ -26,38 +30,33 @@ class Box extends React.Component {
     if (this.state.player) {
       this.state.player.removeBox()
     }
-    this.setState({
-      player: player
-    })
+    this.setState({player})
     player.addBox(this)
   }
 
-  onClick = (activePlayer) => {
-    if (activePlayer.canAddBox(this)) {
-      this.setPlayer(activePlayer)
+  onClick = () => {
+    if (this.state.requiredAction != ACTION_CLICK_BOX) {
+      return false
+    }
+    if (this.state.activePlayer.canAddBox(this)) {
+      this.setPlayer(this.state.activePlayer)
     }
   }
 
   render() {
     return (
-      <ActivePlayerContext.Consumer>
-        {
-          (activePlayer) => (
-            <div className="outerBox">
-              <div
-                className="innerBox"
-                style={{
-                  backgroundColor: this.state.player ? this.state.player.color : "",
-                  color: this.state.player ? "white" : ""
-                }}
-                onClick={() => this.onClick(activePlayer)}
-                >
-                {this.state.letter}
-              </div>
-            </div>
-          )
-        }
-      </ActivePlayerContext.Consumer>
+      <div className="outerBox">
+        <div
+          className={"innerBox " + (this.state.requiredAction != ACTION_CLICK_BOX ? "inactive" : "")}
+          style={{
+            backgroundColor: this.state.player ? this.state.player.color : "",
+            color: this.state.player ? "white" : ""
+          }}
+          onClick={() => this.onClick()}
+          >
+          {this.state.letter}
+        </div>
+      </div>
     )
   }
     
