@@ -10,6 +10,11 @@ const WordEntry = ({active}) => {
   const activePlayer = useContext(ActivePlayerContext)
   const switchActivePlayer = useContext(SwitchActivePlayerContext)
   const [value, setValue] = useState("")
+  const onClick = () => {
+    if (!active) {
+      setTextFlash({content: "Click a box", color: "red"})
+    }
+  }
   const onChange = (e) => {
     setValue(e.target.value)
   }
@@ -32,8 +37,8 @@ const WordEntry = ({active}) => {
         <div className="labelContainer">
             <label>Enter a word</label>
         </div>
-        <div className="inputContainer">
-            <input ref={input => input && input.focus()} id="wordEntry" type="text" value={value} disabled={!active} onChange={onChange} onKeyDown={onKeyDown}  />
+        <div className="inputContainer" onClick={onClick}>
+            <input ref={input => input && input.focus()} id="wordEntry" type="text" value={value} disabled={!active} autoComplete={false} onChange={onChange} onKeyDown={onKeyDown} />
         </div>
     </div>
   )

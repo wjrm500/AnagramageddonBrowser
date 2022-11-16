@@ -9,7 +9,8 @@ class Box extends React.Component {
       coords: {x: props.rowIdx, y: props.colIdx},
       activePlayer: props.activePlayer,
       active: props.active,
-      postBoxClickHandler: props.postBoxClickHandler
+      postBoxClickHandler: props.postBoxClickHandler,
+      setTextFlash: props.setTextFlash
     }
   }
 
@@ -43,7 +44,8 @@ class Box extends React.Component {
 
   onClick = () => {
     if (!this.state.active) {
-      return false
+      this.state.setTextFlash({content: "Enter a word", color: "red"})
+      return
     }
     if (this.state.activePlayer.canAddBox(this)) {
       this.setPlayer(this.state.activePlayer)

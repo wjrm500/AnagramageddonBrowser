@@ -2,10 +2,12 @@ import React, { useContext } from 'react'
 import { ActivePlayerContext } from '../contexts/ActivePlayerContext'
 import PlayerContext from '../contexts/PlayerContext'
 import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, RequiredActionContext, SetRequiredActionContext } from '../contexts/RequiredActionContext'
+import SetTextFlashContext from '../contexts/TextFlashContext'
 import Box from './Box'
 
 const Grid = () => {
   const dimension = 5
+  const setTextFlash = useContext(SetTextFlashContext)
   const players = useContext(PlayerContext)
   const activePlayer = useContext(ActivePlayerContext)
   const requiredAction = useContext(RequiredActionContext)
@@ -22,7 +24,7 @@ const Grid = () => {
       } else if (bottomRight) {
         player = players[1]
       }
-      const box = <Box defaultPlayer={player} rowIdx={rowIdx} colIdx={colIdx} activePlayer={activePlayer} active={requiredAction == ACTION_CLICK_BOX} postBoxClickHandler={postBoxClickHandler}/>
+      const box = <Box defaultPlayer={player} rowIdx={rowIdx} colIdx={colIdx} activePlayer={activePlayer} active={requiredAction == ACTION_CLICK_BOX} postBoxClickHandler={postBoxClickHandler} setTextFlash={setTextFlash}/>
       boxes.push(box)
       return box
     })
