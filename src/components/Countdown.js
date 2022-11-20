@@ -1,28 +1,23 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { ActivePlayerContext, SwitchActivePlayerContext } from '../contexts/ActivePlayerContext'
+import React, { useEffect, useContext } from 'react'
+import { SwitchActivePlayerContext } from '../contexts/ActivePlayerContext'
+import { INIT_COUNTDOWN } from '../components/Container'
 
-const INITIAL_COUNT = 5
-
-const Countdown = () => {
-  useContext(ActivePlayerContext)
+const Countdown = ({countdownSeconds, setCountdownSeconds}) => {
   const switchActivePlayer = useContext(SwitchActivePlayerContext)
-  const [secondsRemaining, setSecondsRemaining] = useState(INITIAL_COUNT)
-
   useEffect(() => {
     const interval = setInterval(() => {
-      if (secondsRemaining > 0) {
-        setSecondsRemaining(secondsRemaining - 1)
+      if (countdownSeconds > 0) {
+        setCountdownSeconds(countdownSeconds - 1)
       } else {
         switchActivePlayer()
-        setSecondsRemaining(INITIAL_COUNT)
+        setCountdownSeconds(INIT_COUNTDOWN)
       }
     }, 1000)
     return () => clearInterval(interval)
-  }, [secondsRemaining])
-
+  }, [countdownSeconds])
   return (
     <span id="countdown">
-        {secondsRemaining}
+        {countdownSeconds}
     </span>
   )
 }

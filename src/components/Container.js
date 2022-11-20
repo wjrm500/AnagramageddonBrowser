@@ -13,21 +13,26 @@ import TextFlash from './TextFlash'
 import WinnerBanner from './WinnerBanner'
 import WordEntry from './WordEntry'
 
+export const INIT_COUNTDOWN = 10
+
 const Container = () => {
   const players = useContext(PlayerContext)
+  const [countdownSeconds, setCountdownSeconds] = useState(INIT_COUNTDOWN)
+  const setRequiredActionReducer = (_, requiredAction) => requiredAction
+  const [requiredAction, setRequiredAction] = useReducer(setRequiredActionReducer, ACTION_CLICK_BOX)
   const switchActivePlayerReducer = (activePlayer) => {
     const playersCopy = players.slice()
     const removeIndex = playersCopy.indexOf(activePlayer)
     playersCopy.splice(removeIndex, 1)
     const newActivePlayer = playersCopy[0]
+    setCountdownSeconds(INIT_COUNTDOWN)
+    setRequiredAction(ACTION_CLICK_BOX)
     return newActivePlayer
   }
   const [activePlayer, switchActivePlayer] = useReducer(switchActivePlayerReducer, players[0])
-  const setRequiredActionReducer = (_, requiredAction) => requiredAction
-  const [requiredAction, setRequiredAction] = useReducer(setRequiredActionReducer, ACTION_CLICK_BOX)
   const textFlashReducer = (_, textFlash) => textFlash
   const [textFlash, setTextFlash] = useReducer(textFlashReducer, {content: "", color: "black"})
-  const countdown = <Countdown />
+  const countdown = <Countdown countdownSeconds={countdownSeconds} setCountdownSeconds={setCountdownSeconds} />
   return (
     <SetTextFlashContext.Provider value={setTextFlash}>
       <PlayerContext.Provider value={players}>
