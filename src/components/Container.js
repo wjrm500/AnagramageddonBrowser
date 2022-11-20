@@ -3,6 +3,7 @@ import { ActivePlayerContext, SwitchActivePlayerContext } from '../contexts/Acti
 import PlayerContext from '../contexts/PlayerContext'
 import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, RequiredActionContext, SetRequiredActionContext } from '../contexts/RequiredActionContext'
 import { SetTextFlashContext } from '../contexts/TextFlashContext'
+import Countdown from './Countdown'
 import Grid from './Grid'
 import Header from './Header'
 import Instruction from './Instruction'
@@ -26,6 +27,7 @@ const Container = () => {
   const [requiredAction, setRequiredAction] = useReducer(setRequiredActionReducer, ACTION_CLICK_BOX)
   const textFlashReducer = (_, textFlash) => textFlash
   const [textFlash, setTextFlash] = useReducer(textFlashReducer, {content: "", color: "black"})
+  const countdown = <Countdown />
   return (
     <SetTextFlashContext.Provider value={setTextFlash}>
       <PlayerContext.Provider value={players}>
@@ -37,7 +39,7 @@ const Container = () => {
                   <TextFlash textFlash={textFlash} />
                   <WinnerBanner />
                   <Header />
-                  <Instruction />
+                  <Instruction countdown={countdown} />
                   <Grid />
                   <WordEntry active={requiredAction == ACTION_ENTER_WORD} />
                   <ScoreTable players={players} />

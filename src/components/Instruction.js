@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { ActivePlayerContext } from '../contexts/ActivePlayerContext'
 import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, RequiredActionContext } from '../contexts/RequiredActionContext'
-import Timer from './Timer'
+// import Timer from './Timer'
 
-const Instruction = () => {
+const Instruction = ({countdown}) => {
   const activePlayer = useContext(ActivePlayerContext)
   const requiredAction = useContext(RequiredActionContext)
   const promptMap = new Map([
@@ -13,7 +13,7 @@ const Instruction = () => {
   const prompt = promptMap.get(requiredAction)
   return (
     <div id="instruction">
-      It's <span id="activePlayer" style={{color: activePlayer.color}}>{activePlayer.name}</span>'s turn! {prompt}. You've got <Timer /> seconds...
+      It's <span id="activePlayer" style={{color: activePlayer.color}}>{activePlayer.name}</span>'s turn! {prompt}. You've got {countdown} seconds...
     </div>
   )
 }
