@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { ActivePlayerContext, SwitchActivePlayerContext } from '../contexts/ActivePlayerContext'
+import { CountdownContext, SetCountdownContext } from '../contexts/CountdownContext'
 import { ACTION_CLICK_BOX, SetRequiredActionContext } from '../contexts/RequiredActionContext'
 import { FLASH_ERROR, FLASH_SCORE, SetTextFlashContext } from '../contexts/TextFlashContext'
 import { validateWord } from '../utilities/validateWord'
@@ -9,6 +10,8 @@ const WordEntry = ({active}) => {
   const setRequiredAction = useContext(SetRequiredActionContext)
   const activePlayer = useContext(ActivePlayerContext)
   const switchActivePlayer = useContext(SwitchActivePlayerContext)
+  const countdownSeconds = useContext(CountdownContext)
+  const setCountdownSeconds = useContext(SetCountdownContext)
   const [value, setValue] = useState("")
   const onClick = () => {
     if (!active) {
@@ -25,11 +28,14 @@ const WordEntry = ({active}) => {
         .then(() => {
           activePlayer.enterWord(word)
           setTextFlash({content: "+" + word.length, status: FLASH_SCORE})
-          setValue("")
           setRequiredAction(ACTION_CLICK_BOX)
           switchActivePlayer()
         })
-        .catch((error) => setTextFlash({content: error, status: FLASH_ERROR}))
+        .catch((error) => {
+          setCountdownSeconds(countdownSeconds - 5)
+          setTextFlash({content: error, status: FLASH_ERROR})
+        })
+        .finally(() => setValue(""))
     }
   }
   return (
