@@ -1,5 +1,5 @@
 const dictionaryUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/"
-const missingWords = ["BE", "FOR", "IS", "WAS"]
+const missingWords = ["BE", "FOR", "IS", "WAS", "NET"]
 
 export function validateWord(word, player) {
   // Check whether player has already used word
