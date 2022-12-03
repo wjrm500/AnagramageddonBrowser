@@ -30,3 +30,7 @@
   animation: fadeIn 0.75s linear;
   display: flex !important;
 }
+
+#startNewGame:hover {
+  cursor: pointer;
+}

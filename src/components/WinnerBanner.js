@@ -3,7 +3,7 @@ import React from 'react'
 const WinnerBanner = ({winningPlayer}) => {
   const onButtonClick = () => window.location.reload()
   return (
-    <div id="winnerBanner">
+    <div id="winnerBanner" class="fadeIn">
         <div id="winnerText">
           <span id="winningPlayer">{winningPlayer.name}</span> won the game!
         </div>
