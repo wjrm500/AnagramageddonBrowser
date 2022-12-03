@@ -53,7 +53,7 @@ const Container = () => {
                         : ""
                       }
                       <Header />
-                      <Instruction />
+                      <Instruction winningPlayer={winningPlayer} />
                       <Grid dimension={dimension} />
                       <WordEntry active={requiredAction == ACTION_ENTER_WORD} />
                       <ScoreTable players={players} />

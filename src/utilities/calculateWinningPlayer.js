@@ -5,7 +5,7 @@ export function calculateWinningPlayer(winningScore, players) {
     let player = players[i]
     if (player.score >= winningScore) {
       let potentialScoresCopy = [...potentialScores]
-      potentialScoresCopy.splice(i, 1)
+      potentialScoresCopy.splice(i, 1) // Remove iterated player from array copy so only comparing against other players
       let scoreToBeat = Math.max(...potentialScoresCopy)
       if (player.score > scoreToBeat) {
         return player
