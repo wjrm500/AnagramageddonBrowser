@@ -4,6 +4,7 @@ import { CountdownContext, INIT_COUNTDOWN, SetCountdownContext } from '../contex
 import PlayerContext from '../contexts/PlayerContext'
 import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, RequiredActionContext, SetRequiredActionContext } from '../contexts/RequiredActionContext'
 import { SetTextFlashContext } from '../contexts/TextFlashContext'
+import { calculateWinningPlayer } from '../utilities/calculateWinningPlayer'
 import Grid from './Grid'
 import Header from './Header'
 import Instruction from './Instruction'
@@ -17,11 +18,13 @@ const Container = () => {
   const dimension = 5
   const winningScore = dimension * 5
   const players = useContext(PlayerContext)
+  const winningPlayer = calculateWinningPlayer(winningScore, players)
   const countdownReducer = (_, countdownSeconds) => countdownSeconds
   const [countdownSeconds, setCountdownSeconds] = useReducer(countdownReducer, INIT_COUNTDOWN)
   const setRequiredActionReducer = (_, requiredAction) => requiredAction
   const [requiredAction, setRequiredAction] = useReducer(setRequiredActionReducer, ACTION_CLICK_BOX)
   const switchActivePlayerReducer = (activePlayer) => {
+    activePlayer.turnsTaken += 1
     const playersCopy = players.slice()
     const removeIndex = playersCopy.indexOf(activePlayer)
     playersCopy.splice(removeIndex, 1)
@@ -44,7 +47,11 @@ const Container = () => {
                   <RequiredActionContext.Provider value={requiredAction}>
                     <div id="container">
                       <TextFlash textFlash={textFlash} />
-                      <WinnerBanner />
+                      {
+                        winningPlayer != null
+                        ? <WinnerBanner winningPlayer={winningPlayer} />
+                        : ""
+                      }
                       <Header />
                       <Instruction />
                       <Grid dimension={dimension} />

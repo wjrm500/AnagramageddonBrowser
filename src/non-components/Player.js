@@ -5,6 +5,7 @@ export class Player {
     this.score = 0
     this.boxes = []
     this.wordsUsed = []
+    this.turnsTaken = 0
   }
 
   addBox(box) {

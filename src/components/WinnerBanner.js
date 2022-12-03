@@ -1,12 +1,11 @@
 import React from 'react'
 
-const WinnerBanner = () => {
-  const winningPlayer = null
+const WinnerBanner = ({winningPlayer}) => {
   const onButtonClick = () => window.location.reload()
   return (
     <div id="winnerBanner">
         <div id="winnerText">
-          <span id="winningPlayer">{winningPlayer}</span> won the game!
+          <span id="winningPlayer">{winningPlayer.name}</span> won the game!
         </div>
         <div>
             <button id="startNewGame" onClick={onButtonClick}>
