@@ -5,8 +5,7 @@ import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, RequiredActionContext, SetRequired
 import { SetTextFlashContext } from '../contexts/TextFlashContext'
 import Box from './Box'
 
-const Grid = () => {
-  const dimension = 5
+const Grid = ({dimension}) => {
   const setTextFlash = useContext(SetTextFlashContext)
   const players = useContext(PlayerContext)
   const activePlayer = useContext(ActivePlayerContext)

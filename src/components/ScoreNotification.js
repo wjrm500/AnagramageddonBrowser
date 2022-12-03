@@ -1,7 +1,6 @@
 import React from 'react'
 
-const ScoreNotification = () => {
-  const winningScore = 25
+const ScoreNotification = ({winningScore}) => {
   return (
     <div id="scoreNotification">
       You need {winningScore} points to win!

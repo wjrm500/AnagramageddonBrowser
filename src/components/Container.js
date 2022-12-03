@@ -14,6 +14,8 @@ import WinnerBanner from './WinnerBanner'
 import WordEntry from './WordEntry'
 
 const Container = () => {
+  const dimension = 5
+  const winningScore = dimension * 5
   const players = useContext(PlayerContext)
   const countdownReducer = (_, countdownSeconds) => countdownSeconds
   const [countdownSeconds, setCountdownSeconds] = useReducer(countdownReducer, INIT_COUNTDOWN)
@@ -45,10 +47,10 @@ const Container = () => {
                       <WinnerBanner />
                       <Header />
                       <Instruction />
-                      <Grid />
+                      <Grid dimension={dimension} />
                       <WordEntry active={requiredAction == ACTION_ENTER_WORD} />
                       <ScoreTable players={players} />
-                      <ScoreNotification />
+                      <ScoreNotification winningScore={winningScore} />
                     </div>
                   </RequiredActionContext.Provider>
                 </SetRequiredActionContext.Provider>
