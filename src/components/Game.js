@@ -1,5 +1,4 @@
 import React from 'react'
-import { ACTION_ENTER_WORD } from '../contexts/RequiredActionContext'
 import Grid from './Grid'
 import Instruction from './Instruction'
 import ScoreNotification from './ScoreNotification'
@@ -8,10 +7,10 @@ import TextFlash from './TextFlash'
 import WinnerBanner from './WinnerBanner'
 import WordEntry from './WordEntry'
 
-const Game = ({textFlash, winningPlayer, dimension, requiredAction, players, winningScore}) => {
+const Game = ({winningPlayer, dimension, winningScore}) => {
   return (
     <div class="innerContainer">
-      <TextFlash textFlash={textFlash} />
+      <TextFlash />
       {
         winningPlayer != null
         ? <WinnerBanner winningPlayer={winningPlayer} />
@@ -19,8 +18,8 @@ const Game = ({textFlash, winningPlayer, dimension, requiredAction, players, win
       }
       <Instruction winningPlayer={winningPlayer} />
       <Grid dimension={dimension} />
-      <WordEntry active={requiredAction == ACTION_ENTER_WORD} />
-      <ScoreTable players={players} />
+      <WordEntry />
+      <ScoreTable />
       <ScoreNotification winningScore={winningScore} />
     </div>
   )

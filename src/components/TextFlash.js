@@ -1,7 +1,8 @@
 import React, { useContext } from 'react'
-import { FLASH_NEUTRAL, FLASH_SCORE, SetTextFlashContext } from '../contexts/TextFlashContext'
+import { FLASH_NEUTRAL, FLASH_SCORE, SetTextFlashContext, TextFlashContext } from '../contexts/TextFlashContext'
 
-const TextFlash = ({textFlash}) => {
+const TextFlash = () => {
+  const textFlash = useContext(TextFlashContext)
   const setTextFlash = useContext(SetTextFlashContext)
   const onAnimationEnd = () => setTextFlash({content: "", status: FLASH_NEUTRAL})
   let classNames = []

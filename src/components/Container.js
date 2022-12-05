@@ -3,7 +3,7 @@ import { ActivePlayerContext, SwitchActivePlayerContext } from '../contexts/Acti
 import { CountdownContext, INIT_COUNTDOWN, SetCountdownContext } from '../contexts/CountdownContext'
 import PlayerContext from '../contexts/PlayerContext'
 import { ACTION_CLICK_BOX, RequiredActionContext, SetRequiredActionContext } from '../contexts/RequiredActionContext'
-import { SetTextFlashContext } from '../contexts/TextFlashContext'
+import { SetTextFlashContext, TextFlashContext } from '../contexts/TextFlashContext'
 import { calculateWinningPlayer } from '../utilities/calculateWinningPlayer'
 import Game from './Game'
 import Header from './Header'
@@ -34,20 +34,22 @@ const Container = () => {
     <SetCountdownContext.Provider value={setCountdownSeconds}>
       <CountdownContext.Provider value={countdownSeconds}>
         <SetTextFlashContext.Provider value={setTextFlash}>
-          <PlayerContext.Provider value={players}>
-            <SwitchActivePlayerContext.Provider value={switchActivePlayer}>
-              <ActivePlayerContext.Provider value={activePlayer}>
-                <SetRequiredActionContext.Provider value={setRequiredAction}>
-                  <RequiredActionContext.Provider value={requiredAction}>
-                    <div id="outerContainer">
-                      <Header />
-                      <Game textFlash={textFlash} winningPlayer={winningPlayer} dimension={dimension} requiredAction={requiredAction} players={players} winningScore={winningScore} />
-                    </div>
-                  </RequiredActionContext.Provider>
-                </SetRequiredActionContext.Provider>
-              </ActivePlayerContext.Provider>
-            </SwitchActivePlayerContext.Provider>
-          </PlayerContext.Provider> 
+          <TextFlashContext.Provider value={textFlash}>
+            <PlayerContext.Provider value={players}>
+              <SwitchActivePlayerContext.Provider value={switchActivePlayer}>
+                <ActivePlayerContext.Provider value={activePlayer}>
+                  <SetRequiredActionContext.Provider value={setRequiredAction}>
+                    <RequiredActionContext.Provider value={requiredAction}>
+                      <div id="outerContainer">
+                        <Header />
+                        <Game winningPlayer={winningPlayer} dimension={dimension} winningScore={winningScore} />
+                      </div>
+                    </RequiredActionContext.Provider>
+                  </SetRequiredActionContext.Provider>
+                </ActivePlayerContext.Provider>
+              </SwitchActivePlayerContext.Provider>
+            </PlayerContext.Provider> 
+          </TextFlashContext.Provider>
         </SetTextFlashContext.Provider>
       </CountdownContext.Provider>
     </SetCountdownContext.Provider>
