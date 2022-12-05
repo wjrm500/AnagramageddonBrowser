@@ -7,8 +7,10 @@ import { SetTextFlashContext, TextFlashContext } from '../contexts/TextFlashCont
 import { calculateWinningPlayer } from '../utilities/calculateWinningPlayer'
 import Game from './game/Game'
 import Header from './Header'
+import Setup from './setup/Setup'
 
 const Container = () => {
+  const setup = true
   const dimension = 5
   const winningScore = dimension * 1
   const players = useContext(PlayerContext)
@@ -40,9 +42,13 @@ const Container = () => {
                 <ActivePlayerContext.Provider value={activePlayer}>
                   <SetRequiredActionContext.Provider value={setRequiredAction}>
                     <RequiredActionContext.Provider value={requiredAction}>
-                      <div id="outerContainer">
+                      <div id="container">
                         <Header />
-                        <Game winningPlayer={winningPlayer} dimension={dimension} winningScore={winningScore} />
+                        {
+                          setup
+                          ? <Setup />
+                          : <Game winningPlayer={winningPlayer} dimension={dimension} winningScore={winningScore} />
+                        }
                       </div>
                     </RequiredActionContext.Provider>
                   </SetRequiredActionContext.Provider>

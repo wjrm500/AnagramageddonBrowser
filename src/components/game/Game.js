@@ -9,7 +9,7 @@ import WordEntry from './WordEntry'
 
 const Game = ({winningPlayer, dimension, winningScore}) => {
   return (
-    <div class="innerContainer">
+    <div id="gameContainer">
       <TextFlash />
       {
         winningPlayer != null

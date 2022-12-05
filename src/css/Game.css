@@ -1,0 +1,13 @@
+@import "TextFlash.css";
+@import "WinnerBanner.css";
+@import "Instruction.css";
+@import "Grid.css";
+@import "WordEntry.css";
+@import "ScoreTable.css";
+@import "ScoreNotification.css";
+
+#gameContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
