@@ -5,7 +5,7 @@ import PlayerContext from '../contexts/PlayerContext'
 import { ACTION_CLICK_BOX, RequiredActionContext, SetRequiredActionContext } from '../contexts/RequiredActionContext'
 import { SetTextFlashContext, TextFlashContext } from '../contexts/TextFlashContext'
 import { calculateWinningPlayer } from '../utilities/calculateWinningPlayer'
-import Game from './Game'
+import Game from './game/Game'
 import Header from './Header'
 
 const Container = () => {

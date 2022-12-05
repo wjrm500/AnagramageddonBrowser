@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react'
-import { ActivePlayerContext, SwitchActivePlayerContext } from '../contexts/ActivePlayerContext'
-import { CountdownContext, SetCountdownContext } from '../contexts/CountdownContext'
-import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, RequiredActionContext, SetRequiredActionContext } from '../contexts/RequiredActionContext'
-import { FLASH_ERROR, FLASH_SCORE, SetTextFlashContext } from '../contexts/TextFlashContext'
-import { validateWord } from '../utilities/validateWord'
+import { ActivePlayerContext, SwitchActivePlayerContext } from '../../contexts/ActivePlayerContext'
+import { CountdownContext, SetCountdownContext } from '../../contexts/CountdownContext'
+import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, RequiredActionContext, SetRequiredActionContext } from '../../contexts/RequiredActionContext'
+import { FLASH_ERROR, FLASH_SCORE, SetTextFlashContext } from '../../contexts/TextFlashContext'
+import { validateWord } from '../../utilities/validateWord'
 
 const WordEntry = () => {
   const requiredAction = useContext(RequiredActionContext)

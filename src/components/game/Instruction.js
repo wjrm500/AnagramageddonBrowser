@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import { ActivePlayerContext } from '../contexts/ActivePlayerContext'
-import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, RequiredActionContext } from '../contexts/RequiredActionContext'
+import { ActivePlayerContext } from '../../contexts/ActivePlayerContext'
+import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, RequiredActionContext } from '../../contexts/RequiredActionContext'
 import Countdown from './Countdown'
 
 const Instruction = ({winningPlayer}) => {

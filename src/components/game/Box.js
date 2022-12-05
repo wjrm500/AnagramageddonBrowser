@@ -1,6 +1,6 @@
 import React from 'react'
-import { FLASH_ERROR } from '../contexts/TextFlashContext'
-import { generateRandomLetter } from '../utilities/randomLetter'
+import { FLASH_ERROR } from '../../contexts/TextFlashContext'
+import { generateRandomLetter } from '../../utilities/randomLetter'
 
 class Box extends React.Component {
   constructor(props) {

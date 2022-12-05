@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react'
-import { SwitchActivePlayerContext } from '../contexts/ActivePlayerContext'
-import { INIT_COUNTDOWN, CountdownContext, SetCountdownContext } from '../contexts/CountdownContext'
+import { SwitchActivePlayerContext } from '../../contexts/ActivePlayerContext'
+import { INIT_COUNTDOWN, CountdownContext, SetCountdownContext } from '../../contexts/CountdownContext'
 
 const Countdown = () => {
   const switchActivePlayer = useContext(SwitchActivePlayerContext)
