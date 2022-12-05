@@ -2,21 +2,15 @@ import React, { useContext, useReducer } from 'react'
 import { ActivePlayerContext, SwitchActivePlayerContext } from '../contexts/ActivePlayerContext'
 import { CountdownContext, INIT_COUNTDOWN, SetCountdownContext } from '../contexts/CountdownContext'
 import PlayerContext from '../contexts/PlayerContext'
-import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, RequiredActionContext, SetRequiredActionContext } from '../contexts/RequiredActionContext'
+import { ACTION_CLICK_BOX, RequiredActionContext, SetRequiredActionContext } from '../contexts/RequiredActionContext'
 import { SetTextFlashContext } from '../contexts/TextFlashContext'
 import { calculateWinningPlayer } from '../utilities/calculateWinningPlayer'
-import Grid from './Grid'
+import Game from './Game'
 import Header from './Header'
-import Instruction from './Instruction'
-import ScoreNotification from './ScoreNotification'
-import ScoreTable from './ScoreTable'
-import TextFlash from './TextFlash'
-import WinnerBanner from './WinnerBanner'
-import WordEntry from './WordEntry'
 
 const Container = () => {
   const dimension = 5
-  const winningScore = dimension * 5
+  const winningScore = dimension * 1
   const players = useContext(PlayerContext)
   const winningPlayer = calculateWinningPlayer(winningScore, players)
   const countdownReducer = (_, countdownSeconds) => countdownSeconds
@@ -45,19 +39,9 @@ const Container = () => {
               <ActivePlayerContext.Provider value={activePlayer}>
                 <SetRequiredActionContext.Provider value={setRequiredAction}>
                   <RequiredActionContext.Provider value={requiredAction}>
-                    <div id="container">
-                      <TextFlash textFlash={textFlash} />
-                      {
-                        winningPlayer != null
-                        ? <WinnerBanner winningPlayer={winningPlayer} />
-                        : ""
-                      }
+                    <div id="outerContainer">
                       <Header />
-                      <Instruction winningPlayer={winningPlayer} />
-                      <Grid dimension={dimension} />
-                      <WordEntry active={requiredAction == ACTION_ENTER_WORD} />
-                      <ScoreTable players={players} />
-                      <ScoreNotification winningScore={winningScore} />
+                      <Game textFlash={textFlash} winningPlayer={winningPlayer} dimension={dimension} requiredAction={requiredAction} players={players} winningScore={winningScore} />
                     </div>
                   </RequiredActionContext.Provider>
                 </SetRequiredActionContext.Provider>
