@@ -12,8 +12,8 @@
 
 @keyframes fontGrowBig {
   0% { font-size: 36px; opacity: 1.0; visibility: visible; }
-  30% { font-size: 108px; opacity: 0.9; visibility: visible; }
-  100% { font-size: 300px; opacity: 0; visibility: visible; }
+  30% { font-size: 72px; opacity: 0.9; visibility: visible; }
+  100% { font-size: 180px; opacity: 0; visibility: visible; }
 }
 
 .fontGrow.flashScore {
@@ -22,8 +22,8 @@
 
 @keyframes fontGrowSmall {
   0% { font-size: 12px; opacity: 1.0; visibility: visible; }
-  30% { font-size: 36px; opacity: 0.9; visibility: visible; }
-  100% { font-size: 100px; opacity: 0; visibility: visible; }
+  30% { font-size: 24px; opacity: 0.9; visibility: visible; }
+  100% { font-size: 60px; opacity: 0; visibility: visible; }
 }
 
 .fontGrow.notFlashScore {
