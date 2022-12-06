@@ -10,7 +10,7 @@ const Setup = () => {
   const winningScore = useContext(WinningScoreContext)
   const setWinningScore = useContext(SetWinningScoreContext)
   const setSetupActive = useContext(SetSetupActiveContext)
-  const playerNames = useState(["", ""])
+  const [playerNames, ] = useState(["", ""])
   const modifyPlayerCollection = useContext(ModifyPlayerCollectionContext)
   const onSubmit = (e) => {
     if (new Set(playerNames).size != playerNames.length) {
@@ -26,7 +26,7 @@ const Setup = () => {
     (_, idx) => {
       let blockColor = playerColors[idx]
       return (
-        <div className="formComponent">
+        <div className="formComponent" key={idx}>
           <label><span style={{backgroundColor: blockColor, color: blockColor, marginRight: "5px"}}>000</span>Player {idx + 1} name</label>
           <input type="text" onChange={(e) => playerNames[idx] = e.target.value} required />
         </div>
