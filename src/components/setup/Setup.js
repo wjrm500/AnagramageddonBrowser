@@ -23,7 +23,7 @@ const Setup = () => {
           <input type="number" value="25" />
         </div>
         <div className="formComponent">
-          <input type="submit" />
+          <input id="submitButton" type="submit" />
         </div>
       </form>
     </div>
