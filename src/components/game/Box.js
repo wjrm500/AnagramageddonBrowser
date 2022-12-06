@@ -37,7 +37,7 @@ class Box extends React.Component {
 
   setPlayer = (player) => {
     if (this.state.player) {
-      this.state.player.removeBox()
+      this.state.player.removeBox(this)
     }
     this.setState({player})
     player.addBox(this)
