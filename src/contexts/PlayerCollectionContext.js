@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-const playerColors = ["red", "blue", "gold", "green"]
+const playerColors = ["red", "blue", "green", "gold"]
 const ADD_PLAYERS = "addPlayers"
 const SWITCH_ACTIVE_PLAYER = "switchActivePlayer"
 const PlayerCollectionContext = createContext(null)
