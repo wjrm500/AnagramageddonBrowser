@@ -7,7 +7,7 @@ import TextFlash from './TextFlash'
 import WinnerBanner from './WinnerBanner'
 import WordEntry from './WordEntry'
 
-const Game = ({winningPlayer, winningScore}) => {
+const Game = ({winningPlayer}) => {
   return (
     <div id="gameContainer">
       <TextFlash />
@@ -20,7 +20,7 @@ const Game = ({winningPlayer, winningScore}) => {
       <Grid />
       <WordEntry />
       <ScoreTable />
-      <ScoreNotification winningScore={winningScore} />
+      <ScoreNotification />
     </div>
   )
 }

@@ -1,10 +1,13 @@
 import React, { useContext } from 'react'
 import { GridSizeContext, SetGridSizeContext } from '../../contexts/GridSizeContext'
 import { SetSetupActiveContext } from '../../contexts/SetupActiveContext'
+import { SetWinningScoreContext, WinningScoreContext } from '../../contexts/WinningScoreContext'
 
 const Setup = () => {
   const gridSize = useContext(GridSizeContext)
   const setGridSize = useContext(SetGridSizeContext)
+  const winningScore = useContext(WinningScoreContext)
+  const setWinningScore = useContext(SetWinningScoreContext)
   const setSetupActive = useContext(SetSetupActiveContext)
   const onSubmit = () => setSetupActive(false)
   return (
@@ -20,7 +23,7 @@ const Setup = () => {
         </div>
         <div className="formComponent">
           <label>Winning score</label>
-          <input type="number" value="25" />
+          <input type="number" value={winningScore} onChange={(e) => setWinningScore(parseInt(e.target.value))} min={gridSize} max={gridSize * 10} />
         </div>
         <div className="formComponent">
           <input id="submitButton" type="submit" />
