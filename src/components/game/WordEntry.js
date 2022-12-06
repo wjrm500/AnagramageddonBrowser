@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
-import { ActivePlayerContext, SwitchActivePlayerContext } from '../../contexts/ActivePlayerContext'
-import { CountdownContext, SetCountdownContext } from '../../contexts/CountdownContext'
+import { CountdownContext, INIT_COUNTDOWN, SetCountdownContext } from '../../contexts/CountdownContext'
+import { ModifyPlayerCollectionContext, PlayerCollectionContext } from '../../contexts/PlayerCollectionContext'
 import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, RequiredActionContext, SetRequiredActionContext } from '../../contexts/RequiredActionContext'
 import { FLASH_ERROR, FLASH_SCORE, SetTextFlashContext } from '../../contexts/TextFlashContext'
 import { validateWord } from '../../utilities/validateWord'
@@ -10,8 +10,8 @@ const WordEntry = () => {
   const active = requiredAction == ACTION_ENTER_WORD
   const setTextFlash = useContext(SetTextFlashContext)
   const setRequiredAction = useContext(SetRequiredActionContext)
-  const activePlayer = useContext(ActivePlayerContext)
-  const switchActivePlayer = useContext(SwitchActivePlayerContext)
+  const activePlayer = useContext(PlayerCollectionContext).getActivePlayer()
+  const modifyPlayerCollection = useContext(ModifyPlayerCollectionContext)
   const countdownSeconds = useContext(CountdownContext)
   const setCountdownSeconds = useContext(SetCountdownContext)
   const [value, setValue] = useState("")
@@ -30,8 +30,9 @@ const WordEntry = () => {
         .then(() => {
           activePlayer.enterWord(word)
           setTextFlash({content: "+" + word.length, status: FLASH_SCORE})
+          setCountdownSeconds(INIT_COUNTDOWN)
           setRequiredAction(ACTION_CLICK_BOX)
-          switchActivePlayer()
+          modifyPlayerCollection({action: "switchActivePlayer"}) // Make const
         })
         .catch((error) => {
           setCountdownSeconds(countdownSeconds - 5)

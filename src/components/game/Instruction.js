@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
-import { ActivePlayerContext } from '../../contexts/ActivePlayerContext'
+import { PlayerCollectionContext } from '../../contexts/PlayerCollectionContext'
 import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, RequiredActionContext } from '../../contexts/RequiredActionContext'
 import Countdown from './Countdown'
 
 const Instruction = ({winningPlayer}) => {
-  const activePlayer = useContext(ActivePlayerContext)
+  const activePlayer = useContext(PlayerCollectionContext).getActivePlayer()
   const requiredAction = useContext(RequiredActionContext)
   const promptMap = new Map([
     [ACTION_CLICK_BOX, "Click a square next to one of your squares"],

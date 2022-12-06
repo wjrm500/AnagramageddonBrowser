@@ -1,8 +1,12 @@
+#formContainer {
+  width: 500px;
+}
+
 .formComponent {
   display: flex;
 }
 
-.formComponent * {
+.formComponent > * {
   flex: 1;
   margin: 5px;
   width: 50%;

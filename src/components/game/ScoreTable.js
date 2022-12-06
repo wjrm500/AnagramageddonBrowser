@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
-import PlayerContext from '../../contexts/PlayerContext'
+import { PlayerCollectionContext } from '../../contexts/PlayerCollectionContext'
 
 const ScoreTable = () => {
-  const players = useContext(PlayerContext)
+  const players = useContext(PlayerCollectionContext).getPlayers()
   const rows = players.map((player) => {
     return <tr key={player.name}>
       <td>{player.name}</td>

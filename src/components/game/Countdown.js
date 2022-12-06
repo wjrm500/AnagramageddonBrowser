@@ -1,18 +1,21 @@
 import React, { useEffect, useContext } from 'react'
-import { SwitchActivePlayerContext } from '../../contexts/ActivePlayerContext'
 import { INIT_COUNTDOWN, CountdownContext, SetCountdownContext } from '../../contexts/CountdownContext'
+import { ModifyPlayerCollectionContext } from '../../contexts/PlayerCollectionContext'
+import { ACTION_CLICK_BOX, SetRequiredActionContext } from '../../contexts/RequiredActionContext'
 
 const Countdown = () => {
-  const switchActivePlayer = useContext(SwitchActivePlayerContext)
   const countdownSeconds = useContext(CountdownContext)
   const setCountdownSeconds = useContext(SetCountdownContext)
+  const setRequiredAction = useContext(SetRequiredActionContext)
+  const modifyPlayerCollection = useContext(ModifyPlayerCollectionContext)
   useEffect(() => {
     const interval = setInterval(() => {
       if (countdownSeconds > 0) {
         setCountdownSeconds(countdownSeconds - 1)
       } else {
-        switchActivePlayer()
         setCountdownSeconds(INIT_COUNTDOWN)
+        setRequiredAction(ACTION_CLICK_BOX)
+        modifyPlayerCollection({action: "switchActivePlayer"}) // Make const
       }
     }, 1000)
     return () => clearInterval(interval)

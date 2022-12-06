@@ -1,4 +1,6 @@
-export function calculateWinningPlayer(winningScore, players) {
+export function calculateWinningPlayer(winningScore, playerCollection) {
+  if (playerCollection == null) return null
+  const players = playerCollection.getPlayers()
   const maxTurnsTaken = Math.max(...players.map(x => x.turnsTaken))
   const potentialScores = players.map((player) => player.score + (player.turnsTaken < maxTurnsTaken ? player.boxes.length + 1 : 0))
   for (let i = 0; i < players.length; i++) {
@@ -12,5 +14,5 @@ export function calculateWinningPlayer(winningScore, players) {
       }
     }
   }
-  return null;
+  return null
 }
