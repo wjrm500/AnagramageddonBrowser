@@ -12,7 +12,12 @@ const Setup = () => {
   const setSetupActive = useContext(SetSetupActiveContext)
   const playerNames = useState(["", ""])
   const modifyPlayerCollection = useContext(ModifyPlayerCollectionContext)
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    if (new Set(playerNames).size != playerNames.length) {
+      e.preventDefault()
+      alert("No duplicate player names")
+      return false
+    }
     modifyPlayerCollection({action: ADD_PLAYERS, playerNames: playerNames})
     setSetupActive(false)
   }
@@ -23,7 +28,7 @@ const Setup = () => {
       return (
         <div className="formComponent">
           <label><span style={{backgroundColor: blockColor, color: blockColor, marginRight: "5px"}}>000</span>Player {idx + 1} name</label>
-          <input type="text" onChange={(e) => playerNames[idx] = e.target.value} />
+          <input type="text" onChange={(e) => playerNames[idx] = e.target.value} required />
         </div>
       )
     }
