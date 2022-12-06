@@ -1,8 +1,10 @@
 import React, { useContext, useReducer } from 'react'
 import { ActivePlayerContext, SwitchActivePlayerContext } from '../contexts/ActivePlayerContext'
 import { CountdownContext, INIT_COUNTDOWN, SetCountdownContext } from '../contexts/CountdownContext'
+import { GridSizeContext, INIT_GRID_SIZE, SetGridSizeContext } from '../contexts/GridSizeContext'
 import PlayerContext from '../contexts/PlayerContext'
 import { ACTION_CLICK_BOX, RequiredActionContext, SetRequiredActionContext } from '../contexts/RequiredActionContext'
+import { SetSetupActiveContext, SetupActiveContext } from '../contexts/SetupActiveContext'
 import { SetTextFlashContext, TextFlashContext } from '../contexts/TextFlashContext'
 import { calculateWinningPlayer } from '../utilities/calculateWinningPlayer'
 import Game from './game/Game'
@@ -10,9 +12,11 @@ import Header from './Header'
 import Setup from './setup/Setup'
 
 const Container = () => {
-  const setup = true
-  const dimension = 5
-  const winningScore = dimension * 1
+  const setupActiveReducer = (_, setupActive) => setupActive
+  const [setupActive, setSetupActive] = useReducer(setupActiveReducer, true)
+  const gridSizeReducer = (_, gridSize) => gridSize
+  const [gridSize, setGridSize] = useReducer(gridSizeReducer, INIT_GRID_SIZE)
+  const winningScore = gridSize * 1
   const players = useContext(PlayerContext)
   const winningPlayer = calculateWinningPlayer(winningScore, players)
   const countdownReducer = (_, countdownSeconds) => countdownSeconds
@@ -33,32 +37,40 @@ const Container = () => {
   const textFlashReducer = (_, textFlash) => textFlash
   const [textFlash, setTextFlash] = useReducer(textFlashReducer, {content: "", color: "black"})
   return (
-    <SetCountdownContext.Provider value={setCountdownSeconds}>
-      <CountdownContext.Provider value={countdownSeconds}>
-        <SetTextFlashContext.Provider value={setTextFlash}>
-          <TextFlashContext.Provider value={textFlash}>
-            <PlayerContext.Provider value={players}>
-              <SwitchActivePlayerContext.Provider value={switchActivePlayer}>
-                <ActivePlayerContext.Provider value={activePlayer}>
-                  <SetRequiredActionContext.Provider value={setRequiredAction}>
-                    <RequiredActionContext.Provider value={requiredAction}>
-                      <div id="container">
-                        <Header />
-                        {
-                          setup
-                          ? <Setup />
-                          : <Game winningPlayer={winningPlayer} dimension={dimension} winningScore={winningScore} />
-                        }
-                      </div>
-                    </RequiredActionContext.Provider>
-                  </SetRequiredActionContext.Provider>
-                </ActivePlayerContext.Provider>
-              </SwitchActivePlayerContext.Provider>
-            </PlayerContext.Provider> 
-          </TextFlashContext.Provider>
-        </SetTextFlashContext.Provider>
-      </CountdownContext.Provider>
-    </SetCountdownContext.Provider>
+    <SetSetupActiveContext.Provider value={setSetupActive}>
+      <SetupActiveContext.Provider value={setupActive}>
+        <SetGridSizeContext.Provider value={setGridSize}>
+          <GridSizeContext.Provider value={gridSize}>
+            <SetCountdownContext.Provider value={setCountdownSeconds}>
+              <CountdownContext.Provider value={countdownSeconds}>
+                <SetTextFlashContext.Provider value={setTextFlash}>
+                  <TextFlashContext.Provider value={textFlash}>
+                    <PlayerContext.Provider value={players}>
+                      <SwitchActivePlayerContext.Provider value={switchActivePlayer}>
+                        <ActivePlayerContext.Provider value={activePlayer}>
+                          <SetRequiredActionContext.Provider value={setRequiredAction}>
+                            <RequiredActionContext.Provider value={requiredAction}>
+                              <div id="container">
+                                <Header />
+                                {
+                                  setupActive
+                                  ? <Setup />
+                                  : <Game winningPlayer={winningPlayer} winningScore={winningScore} />
+                                }
+                              </div>
+                            </RequiredActionContext.Provider>
+                          </SetRequiredActionContext.Provider>
+                        </ActivePlayerContext.Provider>
+                      </SwitchActivePlayerContext.Provider>
+                    </PlayerContext.Provider> 
+                  </TextFlashContext.Provider>
+                </SetTextFlashContext.Provider>
+              </CountdownContext.Provider>
+            </SetCountdownContext.Provider>
+          </GridSizeContext.Provider>
+        </SetGridSizeContext.Provider>
+      </SetupActiveContext.Provider>
+    </SetSetupActiveContext.Provider>
   )
 }
 
