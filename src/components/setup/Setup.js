@@ -38,7 +38,7 @@ const Setup = () => {
       <form id="setupForm" onSubmit={onSubmit}>
         <div className="formComponent">
           <label>Number of players (2 - 4)</label>
-          <input type="number" value={numPlayers} onChange={(e) => {
+          <input type="number" value={!isNaN(numPlayers) ? numPlayers : ""} onChange={(e) => {
             const newNumPlayers = e.target.value != "" ? parseInt(e.target.value) : ""
             if (newNumPlayers > numPlayers) {
               for (let i = 0; i < newNumPlayers - numPlayers; i++) {
@@ -55,11 +55,19 @@ const Setup = () => {
         {playerNameInputs}
         <div className="formComponent">
           <label>Grid size (5 - 20)</label>
-          <input type="number" value={gridSize} onChange={(e) => setGridSize(parseInt(e.target.value))} min="5" max="20" />
+          <input type="number"
+                 value={!isNaN(gridSize) ? gridSize : ""}
+                 onChange={(e) => setGridSize(parseInt(e.target.value))}
+                 min="5"
+                 max="20" />
         </div>
         <div className="formComponent">
-          <label>Winning score ({gridSize} - {gridSize * 10})</label>
-          <input type="number" value={winningScore} onChange={(e) => setWinningScore(parseInt(e.target.value))} min={gridSize} max={gridSize * 10} />
+          <label>Winning score {!isNaN(gridSize) ? "(" + gridSize + " - " + gridSize * 10 + ")" : ""} </label>
+          <input type="number"
+                 value={!isNaN(winningScore) ? winningScore : ""}
+                 onChange={(e) => setWinningScore(parseInt(e.target.value))}
+                 min={!isNaN(gridSize) ? gridSize : ""}
+                 max={!isNaN(gridSize) ? gridSize * 10 : ""} />
         </div>
         <div className="formComponent">
           <input id="submitButton" type="submit" />
