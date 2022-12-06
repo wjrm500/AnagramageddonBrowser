@@ -5,7 +5,7 @@ const ScoreTable = () => {
   const players = useContext(PlayerCollectionContext).getPlayers()
   const rows = players.map((player) => {
     return <tr key={player.name}>
-      <td>{player.name}</td>
+      <td style={{color: player.color}}>{player.name}</td>
       <td>{player.score}</td>
     </tr>
   })
