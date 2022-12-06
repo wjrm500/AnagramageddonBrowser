@@ -22,7 +22,7 @@ const Setup = () => {
     setSetupActive(false)
   }
   const [numPlayers, setNumPlayers] = useState(2)
-  const playerNameInputs = numPlayers > 0 ? Array(numPlayers).fill().map(
+  const playerNameInputs = numPlayers > 0 ? Array(Math.min(numPlayers, 4)).fill().map(
     (_, idx) => {
       let blockColor = playerColors[idx]
       return (
