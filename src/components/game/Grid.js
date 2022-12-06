@@ -8,7 +8,6 @@ import Box from './Box'
 
 const Grid = () => {
   const gridSize = useContext(GridSizeContext)
-  console.log(typeof(gridSize))
   const setTextFlash = useContext(SetTextFlashContext)
   const players = useContext(PlayerContext)
   const activePlayer = useContext(ActivePlayerContext)
