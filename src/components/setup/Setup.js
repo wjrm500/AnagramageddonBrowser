@@ -16,7 +16,7 @@ const Setup = () => {
         </div>
         <div className="formComponent">
           <label>Grid size</label>
-          <input type="number" value={gridSize} onChange={(e) => setGridSize(parseInt(e.target.value))} />
+          <input type="number" value={gridSize} onChange={(e) => setGridSize(parseInt(e.target.value))} min="5" max="20" />
         </div>
         <div className="formComponent">
           <label>Winning score</label>
