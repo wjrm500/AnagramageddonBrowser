@@ -4,9 +4,9 @@
   display: grid;
   grid-auto-flow: row;
   grid-gap: 5px;
-  height: 500px;
+  height: 400px;
   margin-top: 20px;
-  width: 50vh;
+  width: 400px;
 }
 
 .row {
