@@ -21,7 +21,6 @@ const Container = () => {
   const winningScoreReducer = (_, winningScore) => winningScore
   const [winningScore, setWinningScore] = useReducer(winningScoreReducer, gridSize * 5)
   const playerCollectionReducer = (playerCollection, data) => {
-    debugger
     switch (data.action) {
       case ADD_PLAYERS:
         const players = data.playerNames.map((playerName, idx) => new Player(playerName, playerColors[idx]))
