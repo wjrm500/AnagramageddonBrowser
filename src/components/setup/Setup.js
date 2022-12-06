@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { GridSizeContext, SetGridSizeContext } from '../../contexts/GridSizeContext'
-import { ModifyPlayerCollectionContext } from '../../contexts/PlayerCollectionContext'
+import { ModifyPlayerCollectionContext, playerColors } from '../../contexts/PlayerCollectionContext'
 import { SetSetupActiveContext } from '../../contexts/SetupActiveContext'
 import { SetWinningScoreContext, WinningScoreContext } from '../../contexts/WinningScoreContext'
 
@@ -18,11 +18,15 @@ const Setup = () => {
   }
   const [numPlayers, setNumPlayers] = useState(2)
   const playerNameInputs = numPlayers > 0 ? Array(numPlayers).fill().map(
-    (_, idx) =>
-    <div className="formComponent">
-      <label><span style={{backgroundColor: "#CCCCCC", color: "#CCCCCC"}}>000</span> Player {idx + 1} name</label>
-      <input type="text" onChange={(e) => playerNames[idx] = e.target.value} />
-    </div>
+    (_, idx) => {
+      let blockColor = playerColors[idx]
+      return (
+        <div className="formComponent">
+          <label><span style={{backgroundColor: blockColor, color: blockColor, marginRight: "5px"}}>000</span>Player {idx + 1} name</label>
+          <input type="text" onChange={(e) => playerNames[idx] = e.target.value} />
+        </div>
+      )
+    }
   ) : ""
   return (
     <div id="formContainer">

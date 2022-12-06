@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react'
 import { CountdownContext, INIT_COUNTDOWN, SetCountdownContext } from '../contexts/CountdownContext'
 import { GridSizeContext, INIT_GRID_SIZE, SetGridSizeContext } from '../contexts/GridSizeContext'
-import { ModifyPlayerCollectionContext, PlayerCollectionContext } from '../contexts/PlayerCollectionContext'
+import { ModifyPlayerCollectionContext, PlayerCollectionContext, playerColors } from '../contexts/PlayerCollectionContext'
 import { ACTION_CLICK_BOX, RequiredActionContext, SetRequiredActionContext } from '../contexts/RequiredActionContext'
 import { SetSetupActiveContext, SetupActiveContext } from '../contexts/SetupActiveContext'
 import { SetTextFlashContext, TextFlashContext } from '../contexts/TextFlashContext'
@@ -24,7 +24,6 @@ const Container = () => {
     debugger
     switch (data.action) {
       case "addPlayers":
-        const playerColors = ["red", "blue", "yellow", "green"]
         const players = data.playerNames.map((playerName, idx) => new Player(playerName, playerColors[idx]))
         playerCollection.addPlayers(players)
         return playerCollection
