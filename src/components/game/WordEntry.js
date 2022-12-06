@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { CountdownContext, INIT_COUNTDOWN, SetCountdownContext } from '../../contexts/CountdownContext'
-import { ModifyPlayerCollectionContext, PlayerCollectionContext } from '../../contexts/PlayerCollectionContext'
+import { ModifyPlayerCollectionContext, PlayerCollectionContext, SWITCH_ACTIVE_PLAYER } from '../../contexts/PlayerCollectionContext'
 import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, RequiredActionContext, SetRequiredActionContext } from '../../contexts/RequiredActionContext'
 import { FLASH_ERROR, FLASH_SCORE, SetTextFlashContext } from '../../contexts/TextFlashContext'
 import { validateWord } from '../../utilities/validateWord'
@@ -32,7 +32,7 @@ const WordEntry = () => {
           setTextFlash({content: "+" + word.length, status: FLASH_SCORE})
           setCountdownSeconds(INIT_COUNTDOWN)
           setRequiredAction(ACTION_CLICK_BOX)
-          modifyPlayerCollection({action: "switchActivePlayer"}) // Make const
+          modifyPlayerCollection({action: SWITCH_ACTIVE_PLAYER}) // Make const
         })
         .catch((error) => {
           setCountdownSeconds(countdownSeconds - 5)

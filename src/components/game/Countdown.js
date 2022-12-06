@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react'
 import { INIT_COUNTDOWN, CountdownContext, SetCountdownContext } from '../../contexts/CountdownContext'
-import { ModifyPlayerCollectionContext } from '../../contexts/PlayerCollectionContext'
+import { ModifyPlayerCollectionContext, SWITCH_ACTIVE_PLAYER } from '../../contexts/PlayerCollectionContext'
 import { ACTION_CLICK_BOX, SetRequiredActionContext } from '../../contexts/RequiredActionContext'
 
 const Countdown = () => {
@@ -15,7 +15,7 @@ const Countdown = () => {
       } else {
         setCountdownSeconds(INIT_COUNTDOWN)
         setRequiredAction(ACTION_CLICK_BOX)
-        modifyPlayerCollection({action: "switchActivePlayer"}) // Make const
+        modifyPlayerCollection({action: SWITCH_ACTIVE_PLAYER}) // Make const
       }
     }, 1000)
     return () => clearInterval(interval)

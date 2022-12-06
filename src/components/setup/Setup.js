@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { GridSizeContext, SetGridSizeContext } from '../../contexts/GridSizeContext'
-import { ModifyPlayerCollectionContext, playerColors } from '../../contexts/PlayerCollectionContext'
+import { ADD_PLAYERS, ModifyPlayerCollectionContext, playerColors } from '../../contexts/PlayerCollectionContext'
 import { SetSetupActiveContext } from '../../contexts/SetupActiveContext'
 import { SetWinningScoreContext, WinningScoreContext } from '../../contexts/WinningScoreContext'
 
@@ -13,7 +13,7 @@ const Setup = () => {
   const playerNames = useState(["", ""])
   const modifyPlayerCollection = useContext(ModifyPlayerCollectionContext)
   const onSubmit = () => {
-    modifyPlayerCollection({action: "addPlayers", playerNames: playerNames})
+    modifyPlayerCollection({action: ADD_PLAYERS, playerNames: playerNames})
     setSetupActive(false)
   }
   const [numPlayers, setNumPlayers] = useState(2)
