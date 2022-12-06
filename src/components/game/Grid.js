@@ -19,10 +19,16 @@ const Grid = () => {
       let player
       const topLeft = rowIdx + colIdx == 0
       const bottomRight = rowIdx * colIdx == Math.pow(gridSize - 1, 2)
+      const topRight = rowIdx == 0 && colIdx == gridSize - 1
+      const bottomLeft = rowIdx == gridSize - 1 && colIdx == 0
       if (topLeft) {
         player = playerCollection.getPlayerByIdx(0)
       } else if (bottomRight) {
         player = playerCollection.getPlayerByIdx(1)
+      } else if (topRight && playerCollection.getPlayers().length > 2) {
+        player = playerCollection.getPlayerByIdx(2)
+      } else if (bottomLeft && playerCollection.getPlayers().length > 3) {
+        player = playerCollection.getPlayerByIdx(3)
       }
       const box = <Box defaultPlayer={player} rowIdx={rowIdx} colIdx={colIdx} activePlayer={activePlayer} active={requiredAction == ACTION_CLICK_BOX} postBoxClickHandler={postBoxClickHandler} setTextFlash={setTextFlash}/>
       boxes.push(box)
