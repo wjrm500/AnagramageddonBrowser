@@ -54,12 +54,12 @@ const Setup = () => {
         </div>
         {playerNameInputs}
         <div className="formComponent">
-          <label>Grid size (5 - 20)</label>
+          <label>Grid size (5 - 15)</label>
           <input type="number"
                  value={!isNaN(gridSize) ? gridSize : ""}
                  onChange={(e) => setGridSize(parseInt(e.target.value))}
                  min="5"
-                 max="20" />
+                 max="15" />
         </div>
         <div className="formComponent">
           <label>Winning score {!isNaN(gridSize) ? "(" + gridSize + " - " + gridSize * 10 + ")" : ""} </label>
