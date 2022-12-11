@@ -1,5 +1,5 @@
 import React from 'react'
-import { FLASH_ERROR } from '../../contexts/TextFlashContext'
+import { FLASH_ERROR } from '../../reducers/textFlash'
 import { generateRandomLetter } from '../../utilities/randomLetter'
 
 class Box extends React.Component {

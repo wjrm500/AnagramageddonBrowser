@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
-import { WinningScoreContext } from '../../contexts/WinningScoreContext'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
 const ScoreNotification = () => {
-  const winningScore = useContext(WinningScoreContext)
+  const winningScore = useSelector(state => state.winningScore)
   return (
     <div id="scoreNotification">
       You need {winningScore} points to win!

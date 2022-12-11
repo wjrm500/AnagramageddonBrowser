@@ -1,18 +1,16 @@
-import React, { useContext } from 'react'
-import { GridSizeContext } from '../../contexts/GridSizeContext'
-import { PlayerCollectionContext } from '../../contexts/PlayerCollectionContext'
-import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, RequiredActionContext, SetRequiredActionContext } from '../../contexts/RequiredActionContext'
-import { SetTextFlashContext } from '../../contexts/TextFlashContext'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, SET_REQUIRED_ACTION } from '../../reducers/requiredAction'
+import { SET_TEXT_FLASH } from '../../reducers/textFlash'
 import Box from './Box'
 
 const Grid = () => {
-  const gridSize = useContext(GridSizeContext)
-  const setTextFlash = useContext(SetTextFlashContext)
-  const playerCollection = useContext(PlayerCollectionContext)
+  const gridSize = useSelector(state => state.gridSize)
+  const playerCollection = useSelector(state => state.playerCollection)
   const activePlayer = playerCollection.getActivePlayer()
-  const requiredAction = useContext(RequiredActionContext)
-  const setRequiredAction = useContext(SetRequiredActionContext)
-  const postBoxClickHandler = () => setRequiredAction(ACTION_ENTER_WORD)
+  const requiredAction = useSelector(state => state.requiredAction)
+  const dispatch = useDispatch()
+  const postBoxClickHandler = () => dispatch({type: SET_REQUIRED_ACTION, value: ACTION_ENTER_WORD})
   let boxes = []
   const rows = Array(gridSize).fill().map((_, rowIdx) => {
     const row = Array(gridSize).fill().map((_, colIdx) => {
@@ -30,7 +28,7 @@ const Grid = () => {
       } else if (bottomLeft && playerCollection.getPlayers().length > 3) {
         player = playerCollection.getPlayerByIdx(3)
       }
-      const box = <Box defaultPlayer={player} rowIdx={rowIdx} colIdx={colIdx} activePlayer={activePlayer} active={requiredAction == ACTION_CLICK_BOX} postBoxClickHandler={postBoxClickHandler} setTextFlash={setTextFlash}/>
+      const box = <Box defaultPlayer={player} rowIdx={rowIdx} colIdx={colIdx} activePlayer={activePlayer} active={requiredAction == ACTION_CLICK_BOX} postBoxClickHandler={postBoxClickHandler} setTextFlash={(value) => dispatch({type: SET_TEXT_FLASH, value: value})}/>
       boxes.push(box)
       return box
     })

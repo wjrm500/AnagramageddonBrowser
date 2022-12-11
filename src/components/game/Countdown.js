@@ -1,28 +1,27 @@
-import React, { useEffect, useContext } from 'react'
-import { INIT_COUNTDOWN, CountdownContext, SetCountdownContext } from '../../contexts/CountdownContext'
-import { ModifyPlayerCollectionContext, SWITCH_ACTIVE_PLAYER } from '../../contexts/PlayerCollectionContext'
-import { ACTION_CLICK_BOX, SetRequiredActionContext } from '../../contexts/RequiredActionContext'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { INIT_COUNTDOWN_SECONDS, SET_COUNTDOWN_SECONDS } from '../../reducers/countdownSeconds'
+import { SWITCH_ACTIVE_PLAYER } from '../../reducers/playerCollection'
+import { ACTION_CLICK_BOX, SET_REQUIRED_ACTION } from '../../reducers/requiredAction'
 
 const Countdown = () => {
-  const countdownSeconds = useContext(CountdownContext)
-  const setCountdownSeconds = useContext(SetCountdownContext)
-  const setRequiredAction = useContext(SetRequiredActionContext)
-  const modifyPlayerCollection = useContext(ModifyPlayerCollectionContext)
+  const countdownSeconds = useSelector(state => state.countdownSeconds)
+  const dispatch = useDispatch()
   useEffect(() => {
     const interval = setInterval(() => {
       if (countdownSeconds > 0) {
-        setCountdownSeconds(countdownSeconds - 1)
+        dispatch({type: SET_COUNTDOWN_SECONDS, value: countdownSeconds - 1})
       } else {
-        setCountdownSeconds(INIT_COUNTDOWN)
-        setRequiredAction(ACTION_CLICK_BOX)
-        modifyPlayerCollection({action: SWITCH_ACTIVE_PLAYER}) // Make const
+        dispatch({type: SET_COUNTDOWN_SECONDS, value: INIT_COUNTDOWN_SECONDS})
+        dispatch({type: SET_REQUIRED_ACTION, value: ACTION_CLICK_BOX})
+        dispatch({type: SWITCH_ACTIVE_PLAYER, value: null})
       }
     }, 1000)
     return () => clearInterval(interval)
   }, [countdownSeconds])
   return (
     <span id="countdown">
-        {countdownSeconds}
+      {countdownSeconds}
     </span>
   )
 }

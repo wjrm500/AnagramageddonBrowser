@@ -1,24 +1,22 @@
-import React, { useContext, useState } from 'react'
-import { GridSizeContext, SetGridSizeContext } from '../../contexts/GridSizeContext'
-import { ADD_PLAYERS, ModifyPlayerCollectionContext, playerColors } from '../../contexts/PlayerCollectionContext'
-import { SetSetupActiveContext } from '../../contexts/SetupActiveContext'
-import { SetWinningScoreContext, WinningScoreContext } from '../../contexts/WinningScoreContext'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { SET_GRID_SIZE } from '../../reducers/gridSize'
+import { ADD_PLAYERS, playerColors } from '../../reducers/playerCollection'
+import { SET_WINNING_SCORE } from '../../reducers/winningScore'
 
-const Setup = () => {
-  const gridSize = useContext(GridSizeContext)
-  const setGridSize = useContext(SetGridSizeContext)
-  const winningScore = useContext(WinningScoreContext)
-  const setWinningScore = useContext(SetWinningScoreContext)
-  const setSetupActive = useContext(SetSetupActiveContext)
+const Setup = ({setSetupActive}) => {
+  console.log(useSelector(state => state.gridSize))
+  const gridSize = useSelector(state => state.gridSize)
+  const winningScore = useSelector(state => state.winningScore)
   const [playerNames, ] = useState(["", ""])
-  const modifyPlayerCollection = useContext(ModifyPlayerCollectionContext)
+  const dispatch = useDispatch()
   const onSubmit = (e) => {
+    e.preventDefault()
     if (new Set(playerNames).size != playerNames.length) {
-      e.preventDefault()
       alert("No duplicate player names")
       return false
     }
-    modifyPlayerCollection({action: ADD_PLAYERS, playerNames: playerNames})
+    dispatch({type: ADD_PLAYERS, value: playerNames})
     setSetupActive(false)
   }
   const [numPlayers, setNumPlayers] = useState(2)
@@ -57,7 +55,7 @@ const Setup = () => {
           <label>Grid size (5 - 15)</label>
           <input type="number"
                  value={!isNaN(gridSize) ? gridSize : ""}
-                 onChange={(e) => setGridSize(parseInt(e.target.value))}
+                 onChange={(e) => dispatch({type: SET_GRID_SIZE, value: parseInt(e.target.value)})}
                  min="5"
                  max="15" />
         </div>
@@ -65,7 +63,7 @@ const Setup = () => {
           <label>Winning score {!isNaN(gridSize) ? "(" + gridSize + " - " + gridSize * 10 + ")" : ""} </label>
           <input type="number"
                  value={!isNaN(winningScore) ? winningScore : ""}
-                 onChange={(e) => setWinningScore(parseInt(e.target.value))}
+                 onChange={(e) => dispatch({type: SET_WINNING_SCORE, value: parseInt(e.target.value)})}
                  min={!isNaN(gridSize) ? gridSize : ""}
                  max={!isNaN(gridSize) ? gridSize * 10 : ""} />
         </div>

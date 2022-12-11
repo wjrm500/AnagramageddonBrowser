@@ -1,6 +1,8 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
-const WinnerBanner = ({winningPlayer}) => {
+const WinnerBanner = () => {
+  const winningPlayer = useSelector(state => state.winningPlayer)
   const onButtonClick = () => window.location.reload()
   return (
     <div id="winnerBanner" class="fadeIn">

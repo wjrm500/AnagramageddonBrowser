@@ -1,8 +1,9 @@
-import React, { useContext } from 'react'
-import { PlayerCollectionContext } from '../../contexts/PlayerCollectionContext'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
 const ScoreTable = () => {
-  const players = useContext(PlayerCollectionContext).getPlayers()
+  const playerCollection = useSelector(state => state.playerCollection)
+  const players = playerCollection.getPlayers()
   const rows = players.map((player) => {
     return <tr key={player.name}>
       <td style={{color: player.color}}>{player.name}</td>

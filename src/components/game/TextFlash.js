@@ -1,10 +1,11 @@
-import React, { useContext } from 'react'
-import { FLASH_NEUTRAL, FLASH_SCORE, SetTextFlashContext, TextFlashContext } from '../../contexts/TextFlashContext'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { FLASH_NEUTRAL, FLASH_SCORE, SET_TEXT_FLASH } from '../../reducers/textFlash'
 
 const TextFlash = () => {
-  const textFlash = useContext(TextFlashContext)
-  const setTextFlash = useContext(SetTextFlashContext)
-  const onAnimationEnd = () => setTextFlash({content: "", status: FLASH_NEUTRAL})
+  const textFlash = useSelector(state => state.textFlash)
+  const dispatch = useDispatch()
+  const onAnimationEnd = () => dispatch({type: SET_TEXT_FLASH, value: {content: "", status: FLASH_NEUTRAL}})
   let classNames = []
   if (textFlash.content.length > 0) {
     classNames.push("fontGrow")
