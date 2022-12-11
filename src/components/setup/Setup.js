@@ -69,7 +69,7 @@ const Setup = ({setSetupActive}) => {
                  max={!isNaN(gridSize) ? gridSize * 10 : ""} />
         </div>
         <div className="formComponent">
-          <label>Time limit (5 - 30)</label>
+          <label>Turn time limit (5 - 30)</label>
           <input type="number"
                  value={!isNaN(maxCountdownSeconds) ? maxCountdownSeconds : ""}
                  onChange={(e) => dispatch({type: SET_MAX_COUNTDOWN, maxCountdown: parseInt(e.target.value)})}
