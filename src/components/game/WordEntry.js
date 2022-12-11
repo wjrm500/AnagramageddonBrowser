@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { DECREMENT_COUNTDOWN, INIT_COUNTDOWN_SECONDS, RESET_COUNTDOWN, SET_COUNTDOWN_SECONDS } from '../../reducers/countdownSeconds'
+import { DECREMENT_COUNTDOWN, RESET_COUNTDOWN } from '../../reducers/countdownSeconds'
 import { ENTER_WORD, SWITCH_ACTIVE_PLAYER } from '../../reducers/playerCollection'
 import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, SET_REQUIRED_ACTION } from '../../reducers/requiredAction'
 import { FLASH_ERROR, FLASH_SCORE, SET_TEXT_FLASH } from '../../reducers/textFlash'
@@ -32,7 +32,7 @@ const WordEntry = () => {
           dispatch({type: SWITCH_ACTIVE_PLAYER})
         })
         .catch((error) => {
-          dispatch({type: DECREMENT_COUNTDOWN, value: 5})
+          dispatch({type: DECREMENT_COUNTDOWN, decrementBy: 5})
           dispatch({type: SET_TEXT_FLASH, value: {content: error, status: FLASH_ERROR}})
         })
         .finally(() => setValue(""))

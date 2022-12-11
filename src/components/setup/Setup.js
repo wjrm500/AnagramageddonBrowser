@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { SET_MAX_COUNTDOWN } from '../../reducers/countdownSeconds'
 import { SET_GRID_SIZE } from '../../reducers/gridSize'
 import { ADD_PLAYERS, playerColors } from '../../reducers/playerCollection'
 import { SET_WINNING_SCORE } from '../../reducers/winningScore'
 
 const Setup = ({setSetupActive}) => {
-  console.log(useSelector(state => state.gridSize))
   const gridSize = useSelector(state => state.gridSize)
   const winningScore = useSelector(state => state.winningScore)
+  const maxCountdownSeconds = useSelector(state => state.countdownSeconds.max)
   const [playerNames, ] = useState(["", ""])
   const dispatch = useDispatch()
   const onSubmit = (e) => {
@@ -66,6 +67,14 @@ const Setup = ({setSetupActive}) => {
                  onChange={(e) => dispatch({type: SET_WINNING_SCORE, value: parseInt(e.target.value)})}
                  min={!isNaN(gridSize) ? gridSize : ""}
                  max={!isNaN(gridSize) ? gridSize * 10 : ""} />
+        </div>
+        <div className="formComponent">
+          <label>Time limit (5 - 30)</label>
+          <input type="number"
+                 value={!isNaN(maxCountdownSeconds) ? maxCountdownSeconds : ""}
+                 onChange={(e) => dispatch({type: SET_MAX_COUNTDOWN, maxCountdown: parseInt(e.target.value)})}
+                 min="5"
+                 max="30" />
         </div>
         <div className="formComponent">
           <input id="submitButton" type="submit" />
