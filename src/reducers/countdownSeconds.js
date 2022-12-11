@@ -1,10 +1,14 @@
-export const SET_COUNTDOWN_SECONDS = 'SET_COUNTDOWN_SECONDS'
-export const INIT_COUNTDOWN_SECONDS = 15
+import { INIT_COUNTDOWN_SECONDS } from "./initCountdownSeconds"
+
+export const DECREMENT_COUNTDOWN = "DECREMENT_COUNTDOWN"
+export const RESET_COUNTDOWN = "RESET_COUNTDOWN"
 
 export const countdownSecondsReducer = (countdownSeconds = INIT_COUNTDOWN_SECONDS, action) => {
   switch (action.type) {
-    case SET_COUNTDOWN_SECONDS:
-      return action.value
+    case DECREMENT_COUNTDOWN:
+      return countdownSeconds - action.value
+    case RESET_COUNTDOWN:
+      return INIT_COUNTDOWN_SECONDS
     default:
       return countdownSeconds
   }

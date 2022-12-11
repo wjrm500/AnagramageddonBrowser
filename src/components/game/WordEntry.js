@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { INIT_COUNTDOWN_SECONDS, SET_COUNTDOWN_SECONDS } from '../../reducers/countdownSeconds'
+import { DECREMENT_COUNTDOWN, INIT_COUNTDOWN_SECONDS, RESET_COUNTDOWN, SET_COUNTDOWN_SECONDS } from '../../reducers/countdownSeconds'
 import { ENTER_WORD, SWITCH_ACTIVE_PLAYER } from '../../reducers/playerCollection'
 import { ACTION_CLICK_BOX, ACTION_ENTER_WORD, SET_REQUIRED_ACTION } from '../../reducers/requiredAction'
 import { FLASH_ERROR, FLASH_SCORE, SET_TEXT_FLASH } from '../../reducers/textFlash'
@@ -10,7 +10,6 @@ const WordEntry = () => {
   const requiredAction = useSelector(state => state.requiredAction)
   const active = requiredAction == ACTION_ENTER_WORD
   const activePlayer = useSelector(state => state.playerCollection).getActivePlayer()
-  const countdownSeconds = useSelector(state => state.countdownSeconds)
   const dispatch = useDispatch()
   const [value, setValue] = useState("")
   const onClick = () => {
@@ -28,12 +27,12 @@ const WordEntry = () => {
         .then(() => {
           dispatch({type: ENTER_WORD, value: word})
           dispatch({type: SET_TEXT_FLASH, value: {content: "+" + word.length, status: FLASH_SCORE}})
-          dispatch({type: SET_COUNTDOWN_SECONDS, value: INIT_COUNTDOWN_SECONDS})
+          dispatch({type: RESET_COUNTDOWN, value: null})
           dispatch({type: SET_REQUIRED_ACTION, value: ACTION_CLICK_BOX})
           dispatch({type: SWITCH_ACTIVE_PLAYER, value: null})
         })
         .catch((error) => {
-          dispatch({type: SET_COUNTDOWN_SECONDS, value: countdownSeconds - 5})
+          dispatch({type: DECREMENT_COUNTDOWN, value: 5})
           dispatch({type: SET_TEXT_FLASH, value: {content: error, status: FLASH_ERROR}})
         })
         .finally(() => setValue(""))

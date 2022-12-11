@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { INIT_COUNTDOWN_SECONDS, SET_COUNTDOWN_SECONDS } from '../../reducers/countdownSeconds'
+import { DECREMENT_COUNTDOWN, RESET_COUNTDOWN, SET_COUNTDOWN_SECONDS } from '../../reducers/countdownSeconds'
 import { SWITCH_ACTIVE_PLAYER } from '../../reducers/playerCollection'
 import { ACTION_CLICK_BOX, SET_REQUIRED_ACTION } from '../../reducers/requiredAction'
 
@@ -10,9 +10,9 @@ const Countdown = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (countdownSeconds > 0) {
-        dispatch({type: SET_COUNTDOWN_SECONDS, value: countdownSeconds - 1})
+        dispatch({type: DECREMENT_COUNTDOWN, value: 1})
       } else {
-        dispatch({type: SET_COUNTDOWN_SECONDS, value: INIT_COUNTDOWN_SECONDS})
+        dispatch({type: RESET_COUNTDOWN, value: null})
         dispatch({type: SET_REQUIRED_ACTION, value: ACTION_CLICK_BOX})
         dispatch({type: SWITCH_ACTIVE_PLAYER, value: null})
       }
