@@ -27,9 +27,9 @@ const WordEntry = () => {
         .then(() => {
           dispatch({type: ENTER_WORD, value: word})
           dispatch({type: SET_TEXT_FLASH, value: {content: "+" + word.length, status: FLASH_SCORE}})
-          dispatch({type: RESET_COUNTDOWN, value: null})
+          dispatch({type: RESET_COUNTDOWN})
           dispatch({type: SET_REQUIRED_ACTION, value: ACTION_CLICK_BOX})
-          dispatch({type: SWITCH_ACTIVE_PLAYER, value: null})
+          dispatch({type: SWITCH_ACTIVE_PLAYER})
         })
         .catch((error) => {
           dispatch({type: DECREMENT_COUNTDOWN, value: 5})

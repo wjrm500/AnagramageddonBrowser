@@ -12,9 +12,9 @@ const Countdown = () => {
       if (countdownSeconds > 0) {
         dispatch({type: DECREMENT_COUNTDOWN, value: 1})
       } else {
-        dispatch({type: RESET_COUNTDOWN, value: null})
+        dispatch({type: RESET_COUNTDOWN})
         dispatch({type: SET_REQUIRED_ACTION, value: ACTION_CLICK_BOX})
-        dispatch({type: SWITCH_ACTIVE_PLAYER, value: null})
+        dispatch({type: SWITCH_ACTIVE_PLAYER})
       }
     }, 1000)
     return () => clearInterval(interval)
