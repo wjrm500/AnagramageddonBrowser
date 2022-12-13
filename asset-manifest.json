@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/AnagramageddonBrowser/static/css/main.d1fee04d.css",
+    "main.js": "/AnagramageddonBrowser/static/js/main.b78cac66.js",
+    "index.html": "/AnagramageddonBrowser/index.html",
+    "main.d1fee04d.css.map": "/AnagramageddonBrowser/static/css/main.d1fee04d.css.map",
+    "main.b78cac66.js.map": "/AnagramageddonBrowser/static/js/main.b78cac66.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d1fee04d.css",
+    "static/js/main.b78cac66.js"
+  ]
+}
